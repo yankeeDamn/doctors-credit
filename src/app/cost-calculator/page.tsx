@@ -6,6 +6,11 @@ export const metadata = { title: "Cost calculator | Doctor's Credit" };
 export default function CostPage() {
   return (
     <main id="main" className="legal" style={{ maxWidth: "52rem" }}>
+      <p>
+        <Link className="btn-solid" href="/carejourney">
+          Open CareJourney India comparison app
+        </Link>
+      </p>
       <p className="eyebrow">Home country versus India</p>
       <h1>Compare the total cost of the journey.</h1>
       <p>
