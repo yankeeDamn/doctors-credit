@@ -1,21 +1,24 @@
 /**
- * Language configuration shared by the provider, the selector and the copy.
- * The visitor's choice is kept in React context and mirrored to localStorage,
- * so it survives a page refresh.
+ * Shared (server + client) language configuration.
  *
- * Flags are intentionally not used: a flag stands for a country, not a
- * language. The picker shows the language code (EN, ES, HI) plus the native name.
+ * The selected language is kept in three places on purpose:
+ *  - the `dc_lang` cookie, so Server Components (layout, footer, homepage)
+ *    render in the right language on the first paint, with no flash;
+ *  - localStorage (`dc-lang`), so the choice survives if cookies are cleared;
+ *  - React context, so client components switch instantly.
  */
 export const LANGUAGES = [
-  { code: 'en', short: 'EN', name: 'English', htmlLang: 'en' },
-  { code: 'es', short: 'ES', name: 'Español', htmlLang: 'es' },
-  { code: 'hi', short: 'HI', name: 'हिन्दी', htmlLang: 'hi' },
+  { code: "en", short: "EN", name: "English", htmlLang: "en" },
+  { code: "es", short: "ES", name: "Español", htmlLang: "es" },
+  { code: "hi", short: "HI", name: "हिन्दी", htmlLang: "hi" },
 ] as const;
 
-export type Lang = (typeof LANGUAGES)[number]['code'];
+export type Lang = (typeof LANGUAGES)[number]["code"];
 
-export const DEFAULT_LANG: Lang = 'en';
-export const LANG_STORAGE_KEY = 'dc-lang';
+export const DEFAULT_LANG: Lang = "en";
+export const LANG_COOKIE = "dc_lang";
+export const LANG_STORAGE_KEY = "dc-lang";
+export const LANG_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 export function isLang(value: unknown): value is Lang {
   return LANGUAGES.some((l) => l.code === value);
@@ -23,13 +26,4 @@ export function isLang(value: unknown): value is Lang {
 
 export function languageMeta(lang: Lang) {
   return LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[0];
-}
-
-/** First supported language in the browser's preference list, if any. */
-export function detectBrowserLang(preferred: readonly string[]): Lang | null {
-  for (const tag of preferred) {
-    const base = tag.toLowerCase().split('-')[0];
-    if (isLang(base)) return base;
-  }
-  return null;
 }
