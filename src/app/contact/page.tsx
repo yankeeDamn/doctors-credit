@@ -1,0 +1,59 @@
+import Link from "next/link";
+import { SITE, phoneDisplay, phoneHref, whatsappEnabled, whatsappHref } from "@/lib/contact";
+import ContactForm from "@/components/ContactForm";
+import { turnstileSiteKey } from "@/lib/turnstile";
+import { getCommon } from "@/lib/i18n/server";
+
+export const metadata = { title: "Contact | Doctor's Credit" };
+
+export default async function ContactPage() {
+  const { t } = await getCommon();
+  return (
+    <main id="main" className="legal">
+      <p className="eyebrow">Contact</p>
+      <h1>A conversation, not a booking desk.</h1>
+      <p>
+        Email{" "}
+        <a href={`mailto:${SITE.email}`}>
+          {SITE.email}
+        </a>
+        {whatsappEnabled() ? ". WhatsApp is available for general, non-emergency contact." : ""}
+      </p>
+      <p>
+        Please do not submit medical records, diagnoses, prescriptions, imaging
+        or other sensitive clinical documents through this form, email we have
+        not requested, or WhatsApp.
+      </p>
+      <p>
+        Quick contact: call or message{" "}
+        <a href={phoneHref()}>{phoneDisplay()}</a> (WhatsApp is available on
+        the same number). This line is for general, non-emergency questions.
+        Talking with a care coordinator is the reliable way to open a file.
+      </p>
+      <p>
+        <Link className="btn-solid" href="/enroll">
+          Talk to a care coordinator
+        </Link>
+      </p>
+      <ContactForm siteKey={turnstileSiteKey()} />
+      {whatsappEnabled() ? (
+        <>
+          <p>
+            <a className="btn-ghost" href={whatsappHref(t.whatsapp.greeting)}>
+              WhatsApp DCredit
+            </a>
+          </p>
+          <p className="fine">
+            Please do not send medical records or other sensitive clinical documents
+            through WhatsApp.
+          </p>
+        </>
+      ) : null}
+      <p>
+        DCredit is not an emergency medical service. If you are experiencing an
+        emergency, use the emergency number where you are. In the United States
+        that number is 911.
+      </p>
+    </main>
+  );
+}

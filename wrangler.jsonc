@@ -1,0 +1,100 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dcredit",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "dcredit"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dcredit",
+      "database_id": "00000000-0000-0000-0000-000000000000", // replace before deploy; placeholder, not a live database
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "APP_ENV": "development"
+  },
+  "env": {
+    "staging": {
+      "name": "dcredit-staging",
+      "workers_dev": false,
+      "preview_urls": false,
+      "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS"
+      },
+      "secrets": {
+        "required": [
+          "SESSION_SECRET",
+          "GOOGLE_CLIENT_ID",
+          "GOOGLE_CLIENT_SECRET",
+          "TURNSTILE_SECRET_KEY",
+          "CASHFREE_CLIENT_ID",
+          "CASHFREE_CLIENT_SECRET"
+        ]
+      },
+      "vars": {
+        "APP_ENV": "staging",
+        "DODO_PAYMENTS_ENVIRONMENT": "test_mode",
+        "DEMO_PAYMENTS": "false",
+        "NEXT_PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAAFRp7EEi8lzZ2lI0",
+        "CASHFREE_ENVIRONMENT": "sandbox",
+        "CASHFREE_API_VERSION": "2026-01-01",
+        "CASHFREE_PUBLIC_ORIGIN": "https://staging.dcredit.in",
+        "CASHFREE_USD_SANDBOX_VERIFIED": "false"
+      },
+      "routes": [],
+      "services": [
+        {
+          "binding": "WORKER_SELF_REFERENCE",
+          "service": "dcredit-staging"
+        }
+      ],
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "dcredit-staging",
+          "database_id": "559e4c25-35c7-4c43-bd20-023722c53440",
+          "migrations_dir": "migrations"
+        }
+      ]
+    },
+    "production": {
+      "name": "dcredit-production",
+      "vars": {
+        "APP_ENV": "production",
+        "DODO_PAYMENTS_ENVIRONMENT": "live_mode",
+        "DODO_PAYMENTS_RETURN_URL": "https://dcredit.in/success"
+      },
+      "routes": [
+        { "pattern": "dcredit.in", "custom_domain": true },
+        { "pattern": "www.dcredit.in", "custom_domain": true }
+      ],
+      "services": [
+        {
+          "binding": "WORKER_SELF_REFERENCE",
+          "service": "dcredit-production"
+        }
+      ],
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "dcredit-production",
+          "database_id": "3fc013d0-b4f6-488c-904d-d4bb6b692d2c",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
+}

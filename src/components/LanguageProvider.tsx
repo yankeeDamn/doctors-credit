@@ -1,3 +1,5 @@
+"use client";
+
 import {
   createContext,
   useCallback,
@@ -5,73 +7,103 @@ import {
   useEffect,
   useMemo,
   useState,
+  useTransition,
   type ReactNode,
-} from 'react';
+} from "react";
+import { useRouter } from "next/navigation";
+import { COMMON, type CommonMessages } from "@/lib/i18n/common";
 import {
-  DEFAULT_LANG,
+  LANG_COOKIE,
+  LANG_COOKIE_MAX_AGE,
   LANG_STORAGE_KEY,
-  detectBrowserLang,
   isLang,
   languageMeta,
   type Lang,
-} from '@/lib/i18n/config';
-import { MESSAGES, type Messages } from '@/lib/i18n/messages';
+} from "@/lib/i18n/config";
 
 type LanguageContextValue = {
   lang: Lang;
   setLang: (next: Lang) => void;
-  /** Copy for the active language. */
-  t: Messages;
+  /** Shared strings for the active language. */
+  t: CommonMessages;
+  /** True while the server re-renders page copy in the new language. */
+  pending: boolean;
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-function readStored(): string | null {
+function persist(next: Lang) {
   try {
-    return window.localStorage.getItem(LANG_STORAGE_KEY);
+    window.localStorage.setItem(LANG_STORAGE_KEY, next);
   } catch {
-    return null; // Storage can be blocked (private mode).
+    // Storage can be blocked (private mode); the cookie still carries the choice.
   }
+  const secure = window.location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${LANG_COOKIE}=${next}; Path=/; Max-Age=${LANG_COOKIE_MAX_AGE}; SameSite=Lax${secure}`;
+  document.documentElement.lang = languageMeta(next).htmlLang;
 }
 
-/** Saved choice first, then the browser's preferred language, then English. */
-function readInitial(): Lang {
-  const stored = readStored();
-  if (isLang(stored)) return stored;
-  return detectBrowserLang(navigator.languages ?? [navigator.language]) ?? DEFAULT_LANG;
-}
+export function LanguageProvider({
+  initialLang,
+  children,
+}: {
+  /** Language the server rendered with (from the `dc_lang` cookie). */
+  initialLang: Lang;
+  children: ReactNode;
+}) {
+  const router = useRouter();
+  const [lang, setLangState] = useState<Lang>(initialLang);
+  const [pending, startTransition] = useTransition();
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(readInitial);
+  const apply = useCallback(
+    (next: Lang) => {
+      setLangState(next);
+      persist(next);
+      // Shared strings switch instantly from context; this re-renders the
+      // Server Components (footer, homepage copy) in the new language.
+      startTransition(() => router.refresh());
+    },
+    [router]
+  );
 
-  // Keep <html lang> accurate for screen readers, hyphenation and fonts.
+  const setLang = useCallback(
+    (next: Lang) => {
+      if (!isLang(next) || next === lang) return;
+      apply(next);
+    },
+    [apply, lang]
+  );
+
+  // If cookies were cleared but localStorage remembers a choice, restore it.
+  // Nothing is written until the visitor actually picks a language.
   useEffect(() => {
-    document.documentElement.lang = languageMeta(lang).htmlLang;
-  }, [lang]);
+    let stored: string | null = null;
+    try {
+      stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+    } catch {
+      return;
+    }
+    if (isLang(stored) && stored !== initialLang) apply(stored);
+    // Run once on mount only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Keep other open tabs in sync.
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
-      if (e.key === LANG_STORAGE_KEY && isLang(e.newValue)) setLangState(e.newValue);
+      if (e.key === LANG_STORAGE_KEY && isLang(e.newValue)) {
+        setLangState(e.newValue);
+        document.documentElement.lang = languageMeta(e.newValue).htmlLang;
+        startTransition(() => router.refresh());
+      }
     };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-
-  // Only a deliberate pick is written; a detected language is not stored.
-  const setLang = useCallback((next: Lang) => {
-    if (!isLang(next)) return;
-    setLangState(next);
-    try {
-      window.localStorage.setItem(LANG_STORAGE_KEY, next);
-    } catch {
-      // The choice still applies for this visit.
-    }
-  }, []);
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [router]);
 
   const value = useMemo<LanguageContextValue>(
-    () => ({ lang, setLang, t: MESSAGES[lang] }),
-    [lang, setLang],
+    () => ({ lang, setLang, t: COMMON[lang], pending }),
+    [lang, setLang, pending]
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
@@ -79,6 +111,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 export function useLanguage() {
   const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error('useLanguage must be used inside <LanguageProvider>.');
+  if (!ctx) throw new Error("useLanguage must be used inside <LanguageProvider>.");
   return ctx;
 }

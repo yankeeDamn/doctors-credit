@@ -1,16 +1,18 @@
-import { useId } from 'react';
-import { useLanguage } from '@/components/LanguageProvider';
-import { whatsappEnabled, whatsappHref } from '@/lib/whatsapp';
+"use client";
+
+import { useId } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
+import { whatsappEnabled, whatsappHref } from "@/lib/contact";
 
 /**
- * Floating "Chat on WhatsApp" button, fixed to the bottom-right corner. The
- * pre-filled greeting follows the selected language. wa.me opens the native
- * app on phones and WhatsApp Web / Desktop on computers.
+ * Floating "Chat on WhatsApp" button, fixed to the bottom-right corner.
+ * The pre-filled greeting follows the selected language. wa.me opens the
+ * native app on phones and WhatsApp Web / Desktop on computers.
  */
 export default function WhatsAppFab() {
   const { t } = useLanguage();
   const noteId = useId();
-  if (!whatsappEnabled) return null;
+  if (!whatsappEnabled()) return null;
 
   return (
     <a
@@ -19,12 +21,12 @@ export default function WhatsAppFab() {
       rel="noopener noreferrer"
       aria-label={t.whatsapp.aria}
       aria-describedby={noteId}
-      className="group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 inline-flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-whatsapp text-white shadow-[0_10px_28px_-8px_rgba(6,45,86,0.55)] ring-1 ring-white/25 transition duration-200 ease-out hover:bg-whatsapp-dark hover:shadow-[0_16px_34px_-8px_rgba(6,45,86,0.6)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-whatsapp active:scale-95 active:shadow-md motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none sm:bottom-6 sm:right-6 sm:h-auto sm:w-auto sm:px-5 sm:py-3.5"
+      className="group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 inline-flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-[#0f7b4f] text-white shadow-[0_10px_28px_-8px_rgba(6,45,86,0.55)] ring-1 ring-white/25 transition duration-200 ease-out hover:bg-[#0c6a43] hover:shadow-[0_16px_34px_-8px_rgba(6,45,86,0.6)] active:scale-95 active:shadow-md motion-safe:hover:-translate-y-0.5 motion-reduce:transition-none sm:bottom-6 sm:right-6 sm:h-auto sm:w-auto sm:px-5 sm:py-3.5"
     >
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
-        className="size-6 shrink-0 transition-transform duration-200 motion-safe:group-hover:scale-110 motion-reduce:transition-none"
+        className="h-6 w-6 shrink-0 transition-transform duration-200 motion-safe:group-hover:scale-110 motion-reduce:transition-none"
       >
         <path
           fill="currentColor"
