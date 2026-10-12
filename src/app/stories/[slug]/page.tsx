@@ -8,6 +8,10 @@ import {
 } from "@/lib/patient-stories";
 import { TREATMENTS } from "@/lib/treatments";
 
+// The root layout reads cookies (language, session), so render per request.
+// Otherwise an unknown slug fails with DYNAMIC_SERVER_USAGE (500) instead of a 404.
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
   return publishedStories().map((story) => ({ slug: story.slug }));
 }
