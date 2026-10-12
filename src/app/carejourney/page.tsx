@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import CareJourneyPlanner from "@/components/CareJourneyPlanner";
+import { turnstileSiteKey } from "@/lib/turnstile";
 
 export const metadata: Metadata = {
-  title: "CareJourney India | Medical Tourism Cost Comparison",
+  title: "CareJourney India | Compare Procedure Costs: At Home vs. India",
   description:
-    "Compare at-home treatment out-of-pocket costs with a complete India medical journey estimate across major procedures.",
+    "Compare what you may pay at home with a complete India medical journey: treatment, flights, companion, stay, visa and aftercare. Estimates only, not quotes.",
 };
 
 export default function CareJourneyPage() {
-  return <CareJourneyPlanner />;
+  return <CareJourneyPlanner siteKey={turnstileSiteKey()} />;
 }

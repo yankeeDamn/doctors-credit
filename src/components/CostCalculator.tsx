@@ -1,177 +1,139 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
-import { TREATMENTS } from "@/lib/treatments";
+import { MoneyInput } from "@/components/carejourney/fields";
+import { DEFAULTS, PROCEDURES, procedureById } from "@/lib/carejourney/data";
+import { compare, formatMoney, homeOutOfPocket, indiaJourney, sanitize, type HomeMode } from "@/lib/carejourney/engine";
 
-function money(n: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(Math.max(0, n));
-}
-
-const INDIA_BASE: Record<string, number> = {
-  "knee-replacement": 6500,
-  "hip-replacement": 7200,
-  ivf: 3500,
-  "dental-implants": 1800,
-  cabg: 9000,
-  cataract: 1200,
-};
-
+/**
+ * The quick calculator. It shares one engine with the full CareJourney tool,
+ * so both always agree. Prices are in USD.
+ */
 export default function CostCalculator() {
-  const [procedure, setProcedure] = useState("knee-replacement");
-  const [insured, setInsured] = useState("insured");
-  const [billed, setBilled] = useState(45000);
-  const [deductibleLeft, setDeductibleLeft] = useState(4000);
-  const [coinsurance, setCoinsurance] = useState(20);
-  const [oopMax, setOopMax] = useState(8500);
-  const [copay, setCopay] = useState(500);
-  const [indiaCare, setIndiaCare] = useState(6500);
-  const [flights, setFlights] = useState(1400);
-  const [visa, setVisa] = useState(200);
-  const [hotel, setHotel] = useState(900);
-  const [local, setLocal] = useState(250);
-  const [companion, setCompanion] = useState(1200);
-  const [follow, setFollow] = useState(400);
-  const [contingency, setContingency] = useState(500);
+  const first = PROCEDURES[0];
+  const [procedureId, setProcedureId] = useState(first.id);
+  const procedure = procedureById(procedureId);
 
-  const usExposure = useMemo(() => {
-    if (insured === "uninsured") return billed + copay;
-    const afterDeductible = Math.max(0, billed - deductibleLeft);
-    const coins = afterDeductible * (coinsurance / 100);
-    const raw = deductibleLeft + coins + copay;
-    return Math.min(raw, oopMax);
-  }, [insured, billed, deductibleLeft, coinsurance, oopMax, copay]);
+  const [mode, setMode] = useState<HomeMode>("self-pay");
+  const [billed, setBilled] = useState<number>(first.homeUsd);
+  const [deductibleLeft, setDeductibleLeft] = useState<number>(DEFAULTS.insured.deductibleRemaining);
+  const [coinsurance, setCoinsurance] = useState<number>(DEFAULTS.insured.coinsurancePct);
+  const [oopMax, setOopMax] = useState<number>(DEFAULTS.insured.outOfPocketMax);
 
-  const indiaTotal =
-    indiaCare + flights + visa + hotel + local + companion + follow + contingency;
-  const delta = usExposure - indiaTotal;
+  const [indiaCare, setIndiaCare] = useState<number>(first.indiaUsd);
+  const [flights, setFlights] = useState<number>(DEFAULTS.flightPerTraveler * 2);
+  const [stay, setStay] = useState<number>(first.stay.typical * DEFAULTS.stayPerDay);
+  const [logistics, setLogistics] = useState<number>(DEFAULTS.visaConciergeTransport);
+  const [follow, setFollow] = useState<number>(DEFAULTS.aftercare);
 
+  function choose(id: string) {
+    const p = procedureById(id);
+    setProcedureId(p.id);
+    setBilled(p.homeUsd); // The old calculator kept the previous procedure's price here.
+    setIndiaCare(p.indiaUsd);
+    setStay(p.stay.typical * DEFAULTS.stayPerDay);
+  }
+
+  const home = useMemo(
+    () => homeOutOfPocket({ mode, retailPrice: billed, deductibleRemaining: deductibleLeft, coinsurancePct: coinsurance, outOfPocketMax: oopMax }),
+    [mode, billed, deductibleLeft, coinsurance, oopMax]
+  );
+  // One lump sum per line here. Flights and stay are already totals, so use a 1-day, 1-traveler journey.
+  const india = useMemo(
+    () =>
+      indiaJourney({
+        hospitalPackage: indiaCare,
+        travelers: 1,
+        flightPerTraveler: flights,
+        stayDays: 1,
+        stayPerDay: stay,
+        visaConciergeTransport: logistics,
+        aftercare: follow,
+        contingencyPct: DEFAULTS.contingencyPct,
+      }),
+    [indiaCare, flights, stay, logistics, follow]
+  );
+  const result = compare(home.total, india.total, procedure.homeWaitMonths, procedure.indiaWaitDays);
+
+  const usd = "USD" as const;
   return (
-    <form className="calc" onSubmit={(e) => e.preventDefault()}>
+    <form className="calc" onSubmit={(e) => e.preventDefault()} aria-labelledby="quick-calc-title">
       <p className="tag">Estimate only</p>
-      <h3>Compare the total cost of the journey</h3>
+      <h3 id="quick-calc-title">Quick comparison for {procedure.short}</h3>
       <p className="muted">
-        Compare expected costs at home with a complete India journey. The
-        deductible and out-of-pocket fields are one example of how some health plans work. They do not describe every country.
-        India figures are journey estimates, not quotes.
+        Every number is editable and in US dollars. Home costs depend on how you pay: the full price if you pay privately, or plan math
+        (deductible, co-insurance, out-of-pocket maximum) if you have insurance. India figures are journey estimates, not quotes.{" "}
+        <Link href="/carejourney">Open the full CareJourney India comparison</Link> for currencies, a PDF and the itemised view.
       </p>
+
       <div className="calc-grid">
         <label>
           Procedure
-          <select
-            value={procedure}
-            onChange={(e) => {
-              setProcedure(e.target.value);
-              setIndiaCare(INDIA_BASE[e.target.value] ?? 5000);
-            }}
-          >
-            {TREATMENTS.filter((t) => t.suitability !== "NOT GENERALLY").map((t) => (
-              <option key={t.slug} value={t.slug}>
-                {t.name}
+          <select value={procedureId} onChange={(e) => choose(e.target.value)}>
+            {PROCEDURES.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name}
               </option>
             ))}
           </select>
         </label>
         <label>
-          Coverage or funding
-          <select value={insured} onChange={(e) => setInsured(e.target.value)}>
-            <option value="insured">Has coverage (plan-math example)</option>
-            <option value="uninsured">Paying yourself / cash</option>
+          How would you pay at home?
+          <select value={mode} onChange={(e) => setMode(e.target.value as HomeMode)}>
+            <option value="self-pay">Self-pay or not covered</option>
+            <option value="insured">Private insurance (plan math)</option>
           </select>
         </label>
-        <label>
-          Estimated procedure price at home
-          <input type="number" min={0} value={billed} onChange={(e) => setBilled(+e.target.value)} />
-        </label>
-        <label>
-          Remaining deductible (US plan example)
-          <input
-            type="number"
-            min={0}
-            value={deductibleLeft}
-            onChange={(e) => setDeductibleLeft(+e.target.value)}
-          />
-        </label>
-        <label>
-          Coinsurance % (US plan example)
-          <input
-            type="number"
-            min={0}
-            max={100}
-            value={coinsurance}
-            onChange={(e) => setCoinsurance(+e.target.value)}
-          />
-        </label>
-        <label>
-          Out-of-pocket maximum (US plan example)
-          <input type="number" min={0} value={oopMax} onChange={(e) => setOopMax(+e.target.value)} />
-        </label>
-        <label>
-          Copay / extra
-          <input type="number" min={0} value={copay} onChange={(e) => setCopay(+e.target.value)} />
-        </label>
-        <label>
-          India treatment estimate
-          <input type="number" min={0} value={indiaCare} onChange={(e) => setIndiaCare(+e.target.value)} />
-        </label>
-        <label>
-          Flights
-          <input type="number" min={0} value={flights} onChange={(e) => setFlights(+e.target.value)} />
-        </label>
-        <label>
-          Visa
-          <input type="number" min={0} value={visa} onChange={(e) => setVisa(+e.target.value)} />
-        </label>
-        <label>
-          Hotel / stay
-          <input type="number" min={0} value={hotel} onChange={(e) => setHotel(+e.target.value)} />
-        </label>
-        <label>
-          Local transport
-          <input type="number" min={0} value={local} onChange={(e) => setLocal(+e.target.value)} />
-        </label>
-        <label>
-          Companion expenses
-          <input type="number" min={0} value={companion} onChange={(e) => setCompanion(+e.target.value)} />
-        </label>
-        <label>
-          Follow-up / tests
-          <input type="number" min={0} value={follow} onChange={(e) => setFollow(+e.target.value)} />
-        </label>
-        <label>
-          Emergency contingency
-          <input
-            type="number"
-            min={0}
-            value={contingency}
-            onChange={(e) => setContingency(+e.target.value)}
-          />
-        </label>
+        <MoneyInput label="Procedure price at home" usd={billed} currency={usd} onChange={setBilled} />
+        {mode === "insured" ? (
+          <>
+            <MoneyInput label="Deductible remaining" usd={deductibleLeft} currency={usd} onChange={setDeductibleLeft} />
+            <label>
+              Co-insurance % (0 to 100)
+              <input
+                type="number"
+                inputMode="numeric"
+                min={0}
+                max={100}
+                value={coinsurance}
+                onChange={(e) => setCoinsurance(sanitize(e.target.value, 0, 100))}
+              />
+            </label>
+            <MoneyInput label="Out-of-pocket maximum" usd={oopMax} currency={usd} onChange={setOopMax} />
+          </>
+        ) : null}
+        <MoneyInput label="India hospital & doctor package" usd={indiaCare} currency={usd} onChange={setIndiaCare} />
+        <MoneyInput label="Flights (patient + companion)" usd={flights} currency={usd} onChange={setFlights} />
+        <MoneyInput label="Stay in India (total)" usd={stay} currency={usd} onChange={setStay} />
+        <MoneyInput label="Visa, concierge & local transport" usd={logistics} currency={usd} onChange={setLogistics} />
+        <MoneyInput label="Aftercare & follow-up" usd={follow} currency={usd} onChange={setFollow} />
       </div>
-      <div className="result">
+
+      <div className="result" role="status" aria-live="polite">
         <dl>
           <div>
             <dt>Estimated cost at home</dt>
-            <dd>{money(usExposure)}</dd>
+            <dd>{formatMoney(home.total, usd)}</dd>
           </div>
           <div>
-            <dt>Estimated total India journey cost</dt>
-            <dd>{money(indiaTotal)}</dd>
+            <dt>Estimated India journey (incl. {DEFAULTS.contingencyPct}% contingency)</dt>
+            <dd>{formatMoney(india.total, usd)}</dd>
           </div>
           <div>
-            <dt>Potential estimated difference</dt>
+            <dt>Estimated difference</dt>
             <dd>
-              {delta >= 0 ? `${money(delta)} lower in India` : `${money(-delta)} lower at home`}
+              {result.direction === "india-lower"
+                ? `India is about ${formatMoney(result.difference, usd)} lower (${Math.round(result.percent)}%)`
+                : result.direction === "home-lower"
+                  ? `Home is about ${formatMoney(-result.difference, usd)} lower (${Math.round(result.percent)}%)`
+                  : "About the same"}
             </dd>
           </div>
         </dl>
         <p className="source">
-          Estimate only. Not a quote, not a guarantee, and not medical advice. We
-          compare what you may need to pay yourself, not hospital sticker
-          prices alone.
+          Estimate only. Not a quote, not a guarantee, and not medical advice. Savings are not guaranteed, and sometimes home costs less. We
+          compare what you may need to pay yourself, not hospital sticker prices alone.
         </p>
       </div>
     </form>
