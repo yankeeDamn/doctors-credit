@@ -167,6 +167,9 @@ export default async function Home() {
                 {h.talk}
                 <span aria-hidden="true">→</span>
               </Link>
+              <Link className="btn-ghost" href="/carejourney">
+                {h.compare}
+              </Link>
               <button className="hero-watch" type="button">
                 <span className="hero-watch-play" aria-hidden="true">
                   <svg viewBox="0 0 24 24">

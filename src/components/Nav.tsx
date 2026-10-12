@@ -12,7 +12,7 @@ export default function Nav({ signedIn }: { signedIn: boolean }) {
     ["/how-it-works", t.nav.howItWorks],
     ["/treatments", t.nav.treatments],
     ["/hospitals", t.nav.hospitals],
-    ["/cost-calculator", t.nav.costCalculator],
+    ["/carejourney", "CareJourney India"],
     ["/research", t.nav.research],
     ["/stories", t.nav.stories],
     ["/about", t.nav.about],

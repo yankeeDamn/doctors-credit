@@ -47,6 +47,8 @@ export type PagesMessages = {
     heroAfter: string;
     heroLede: string;
     talk: string;
+    /** Hero link to the CareJourney India cost comparison. */
+    compare: string;
     watchTitle: string;
     watchSub: string;
     heroAlt: string;
@@ -166,6 +168,7 @@ const en: PagesMessages = {
     heroLede:
       "Patients anywhere in the world explore India for advanced medical expertise, modern hospitals, compassionate care and outstanding value. We help you decide whether that journey is the right choice for the care you are considering.",
     talk: "Talk to a care coordinator",
+    compare: "Compare costs: home vs India",
     watchTitle: "Watch our story",
     watchSub: "2 minutes",
     heroAlt:
@@ -391,6 +394,7 @@ const es: PagesMessages = {
     heroLede:
       "Pacientes de todo el mundo exploran la India en busca de experiencia médica avanzada, hospitales modernos, atención compasiva y un valor sobresaliente. Le ayudamos a decidir si ese viaje es la opción adecuada para la atención que está considerando.",
     talk: "Hablar con un coordinador de atención",
+    compare: "Comparar costos: en casa o en la India",
     watchTitle: "Ver nuestra historia",
     watchSub: "2 minutos",
     heroAlt:
@@ -620,6 +624,7 @@ const hi: PagesMessages = {
     heroLede:
       "दुनिया भर के मरीज़ उन्नत चिकित्सा विशेषज्ञता, आधुनिक अस्पतालों, संवेदनशील देखभाल और उत्कृष्ट मूल्य के लिए भारत को देखते हैं। जिस देखभाल पर आप विचार कर रहे हैं, उसके लिए वह यात्रा सही विकल्प है या नहीं, यह तय करने में हम आपकी मदद करते हैं।",
     talk: "केयर कोऑर्डिनेटर से बात करें",
+    compare: "लागत की तुलना करें: घर बनाम भारत",
     watchTitle: "हमारी कहानी देखें",
     watchSub: "2 मिनट",
     heroAlt:
