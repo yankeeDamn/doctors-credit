@@ -1,6 +1,7 @@
 "use client";
 
 import { useId } from "react";
+import { LayoutGroup, motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { PROCEDURES, type CurrencyCode } from "@/lib/carejourney/data";
 import { formatMoney } from "@/lib/carejourney/engine";
@@ -50,27 +51,38 @@ export default function ProcedurePicker({
 
       <fieldset className="mt-3">
         <legend className="sr-only">Procedure</legend>
-        <div className="grid gap-2">
-          {list.map((p) => (
-            <label key={p.id} className="relative block cursor-pointer">
-              <input
-                type="radio"
-                name={name}
-                value={p.id}
-                checked={p.id === selectedId}
-                onChange={() => onSelect(p.id)}
-                className="peer sr-only"
-              />
-              <span className="flex items-center justify-between gap-3 rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 transition hover:border-sky-500 peer-checked:border-sky-600 peer-checked:bg-sky-50 peer-checked:ring-2 peer-checked:ring-sky-600/25 peer-focus-visible:ring-2 peer-focus-visible:ring-sky-600">
-                <span className="text-sm font-semibold text-slate-900">{p.name}</span>
-                <span className="shrink-0 text-right text-xs leading-snug text-slate-600">
-                  <span className="block">At home ~{formatMoney(p.homeUsd, currency)}</span>
-                  <span className="block font-semibold text-emerald-700">India ~{formatMoney(p.indiaUsd, currency)}</span>
+        <LayoutGroup id={name}>
+          <div className="grid gap-2">
+            {list.map((p) => (
+              <label key={p.id} className="relative block cursor-pointer">
+                <input
+                  type="radio"
+                  name={name}
+                  value={p.id}
+                  checked={p.id === selectedId}
+                  onChange={() => onSelect(p.id)}
+                  className="peer sr-only"
+                />
+                <span className="relative flex items-center justify-between gap-3 rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 transition-colors hover:border-sky-500 peer-focus-visible:ring-2 peer-focus-visible:ring-sky-600">
+                  {/* One highlight that glides to whichever procedure is picked. */}
+                  {p.id === selectedId ? (
+                    <motion.span
+                      layoutId="procedure-highlight"
+                      aria-hidden="true"
+                      className="absolute -inset-px rounded-xl border border-sky-600 bg-sky-50 ring-2 ring-sky-600/25"
+                      transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                    />
+                  ) : null}
+                  <span className="relative text-sm font-semibold text-slate-900">{p.name}</span>
+                  <span className="relative shrink-0 text-right text-xs leading-snug text-slate-600">
+                    <span className="block">At home ~{formatMoney(p.homeUsd, currency)}</span>
+                    <span className="block font-semibold text-emerald-700">India ~{formatMoney(p.indiaUsd, currency)}</span>
+                  </span>
                 </span>
-              </span>
-            </label>
-          ))}
-        </div>
+              </label>
+            ))}
+          </div>
+        </LayoutGroup>
       </fieldset>
 
       <p className="mt-2 min-h-5 text-sm text-slate-600" role="status">

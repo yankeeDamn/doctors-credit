@@ -46,6 +46,8 @@ export default async function SignInPage({
       "Google Sign-In is not configured yet. Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.",
     google_failed: "Google could not complete sign-in. Try again.",
     account_conflict: "This email is already linked to another Google account. Please contact DCredit.",
+    storage_unavailable:
+      "Google accepted your sign-in, but we could not save your account just now. Please try again later or email care@dcredit.in.",
     bad_state: "That sign-in expired. Start again.",
     missing_code: "Google returned without a code. Start again.",
     demo_disabled: "Demo Google is off because a real Google client is configured.",

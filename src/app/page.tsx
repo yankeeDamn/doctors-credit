@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import CostCalculator from "@/components/CostCalculator";
 import { IndiaDecisionMap } from "@/components/IndiaDecisionMap";
+import CostGapTeaser from "@/components/carejourney/CostGapTeaser";
 import { PatientStoriesGrid } from "@/components/PatientStoriesGrid";
 import { FeedbackSlider } from "@/components/editorial/FeedbackSlider";
 import Reveal from "@/components/Reveal";
@@ -385,6 +386,22 @@ export default async function Home() {
             <div>
               <p className="section-lede">{h.value.p1}</p>
               <p>{h.value.p2}</p>
+              <CostGapTeaser
+                caption={h.costGap.caption}
+                labels={{
+                  atHome: h.costGap.atHome,
+                  india: h.costGap.india,
+                  lower: h.costGap.lower,
+                  higher: h.costGap.higher,
+                  same: h.costGap.same,
+                  split: h.costGap.split,
+                }}
+              />
+              <p className="cost-gap-note">{h.costGap.note}</p>
+              <Link className="btn-ghost" href="/carejourney">
+                {h.costGap.cta}
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
             <CostCalculator />
           </div>

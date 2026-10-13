@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { MoneyInput } from "@/components/carejourney/fields";
+import AnimatedNumber from "@/components/motion/AnimatedNumber";
 import { DEFAULTS, PROCEDURES, procedureById } from "@/lib/carejourney/data";
 import { compare, formatMoney, homeOutOfPocket, indiaJourney, sanitize, type HomeMode } from "@/lib/carejourney/engine";
 
@@ -114,11 +115,15 @@ export default function CostCalculator() {
         <dl>
           <div>
             <dt>Estimated cost at home</dt>
-            <dd>{formatMoney(home.total, usd)}</dd>
+            <dd>
+              <AnimatedNumber value={home.total} format={(n) => formatMoney(n, usd)} duration={0.5} />
+            </dd>
           </div>
           <div>
             <dt>Estimated India journey (incl. {DEFAULTS.contingencyPct}% contingency)</dt>
-            <dd>{formatMoney(india.total, usd)}</dd>
+            <dd>
+              <AnimatedNumber value={india.total} format={(n) => formatMoney(n, usd)} duration={0.5} />
+            </dd>
           </div>
           <div>
             <dt>Estimated difference</dt>

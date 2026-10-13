@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useId, useState } from "react";
-import { CheckCircle2, FileUp, Loader2, MessageCircle, ShieldAlert, X } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { FileUp, Loader2, MessageCircle, ShieldAlert, X } from "lucide-react";
 import TurnstileField from "@/components/TurnstileField";
 import type { CurrencyCode } from "@/lib/carejourney/data";
 import { SITE, whatsappEnabled, whatsappHref } from "@/lib/contact";
@@ -15,6 +16,29 @@ function formatSize(bytes: number) {
 
 const input =
   "mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-sky-600 focus:ring-2 focus:ring-sky-200 sm:text-sm";
+
+/** The confirmation tick draws itself, which shows the request went through. */
+function DrawnTick() {
+  const reduce = !!useReducedMotion();
+  return (
+    <svg aria-hidden="true" viewBox="0 0 32 32" className="h-9 w-9 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <motion.circle
+        cx="16"
+        cy="16"
+        r="13"
+        initial={reduce ? false : { pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={reduce ? { duration: 0 } : { duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      />
+      <motion.path
+        d="M9.5 16.5l4.5 4.5 8.5-9"
+        initial={reduce ? false : { pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={reduce ? { duration: 0 } : { duration: 0.4, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      />
+    </svg>
+  );
+}
 
 export default function LeadForm({
   siteKey,
@@ -81,7 +105,7 @@ export default function LeadForm({
   if (status === "ok") {
     return (
       <div role="status" className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
-        <CheckCircle2 aria-hidden="true" className="h-8 w-8 text-emerald-600" />
+        <DrawnTick />
         <h3 className="mt-3 text-xl font-semibold text-slate-900">Request received</h3>
         <p className="mt-2 text-sm text-slate-700">{message}</p>
         {waLink ? (

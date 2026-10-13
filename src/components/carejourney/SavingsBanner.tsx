@@ -1,25 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { animate } from "framer-motion";
 import { ArrowRight, Clock3, Info, TrendingDown } from "lucide-react";
+import { useCountUp } from "@/components/motion/useCountUp";
 import type { CurrencyCode } from "@/lib/carejourney/data";
 import { formatMoney, formatWait, type Comparison } from "@/lib/carejourney/engine";
-
-function useCountUp(target: number) {
-  const [value, setValue] = useState(target);
-  const from = useRef(target);
-  useEffect(() => {
-    const controls = animate(from.current, target, {
-      duration: 0.6,
-      ease: "easeOut",
-      onUpdate: setValue,
-    });
-    from.current = target;
-    return () => controls.stop();
-  }, [target]);
-  return value;
-}
 
 export default function SavingsBanner({
   comparison,
@@ -32,7 +16,7 @@ export default function SavingsBanner({
   homeWaitMonths: number;
   indiaWaitDays: number;
 }) {
-  const amount = useCountUp(Math.abs(comparison.difference));
+  const amount = useCountUp(Math.abs(comparison.difference), { duration: 0.7 });
   const pct = Math.round(comparison.percent);
   const lower = comparison.direction === "india-lower";
   const higher = comparison.direction === "home-lower";
@@ -49,8 +33,7 @@ export default function SavingsBanner({
       aria-labelledby="savings-heading"
       className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-sky-900 p-6 text-white shadow-xl shadow-slate-300/60 sm:p-8"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-emerald-500/20 blur-3xl" />
-      <p id="savings-heading" className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
+      <p id="savings-heading" className="text-sm font-medium text-sky-200">
         Live comparison
       </p>
 
@@ -64,7 +47,7 @@ export default function SavingsBanner({
           <>
             <p className="text-lg font-medium text-slate-200">Estimated Savings:</p>
             <p className="mt-1 flex flex-wrap items-end gap-x-3 gap-y-1">
-              <span className="text-5xl font-semibold tracking-tight tabular-nums text-emerald-400 sm:text-6xl">{formatMoney(amount, currency)}</span>
+              <span className="font-[family-name:var(--font-fraunces)] text-5xl font-medium tracking-tight tabular-nums text-emerald-400 sm:text-7xl">{formatMoney(amount, currency)}</span>
               <span className="mb-1.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-3 py-1 text-sm font-semibold text-emerald-300 ring-1 ring-emerald-400/30">
                 <TrendingDown className="h-4 w-4" />
                 {pct}% less than at home
@@ -75,7 +58,7 @@ export default function SavingsBanner({
           <>
             <p className="text-lg font-medium text-slate-200">At these inputs, home costs less</p>
             <p className="mt-1 flex flex-wrap items-end gap-x-3">
-              <span className="text-5xl font-semibold tracking-tight tabular-nums text-amber-300 sm:text-6xl">{formatMoney(amount, currency)}</span>
+              <span className="font-[family-name:var(--font-fraunces)] text-5xl font-medium tracking-tight tabular-nums text-amber-300 sm:text-7xl">{formatMoney(amount, currency)}</span>
               <span className="mb-1.5 text-sm font-semibold text-amber-200">more in India ({pct}% higher)</span>
             </p>
           </>
