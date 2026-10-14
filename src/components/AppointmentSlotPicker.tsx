@@ -16,7 +16,7 @@ export default function AppointmentSlotPicker({ calendar }: { calendar: SlotCale
     <fieldset className="slot-picker enroll-span">
       <legend>Choose a conversation date and time</legend>
       <p className="slot-timezone">Times shown in {calendar.timezoneLabel}</p>
-      <p className="slot-hint">These are published DCredit coordinator windows, not a live staff calendar.</p>
+      <p className="slot-hint">These are published CareJourney India coordinator windows, not a live staff calendar.</p>
 
       <p className="slot-label" id="slot-dates-label">
         Date

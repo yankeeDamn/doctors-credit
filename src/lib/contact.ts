@@ -65,8 +65,8 @@ export function whatsappHref(prefill?: string, number: string = WHATSAPP_E164) {
 }
 
 export const SITE = {
-  name: "Doctor's Credit",
-  short: "DCredit",
+  name: "CareJourney India",
+  short: "CareJourney",
   domain: "dcredit.in",
   city: "Hyderabad",
   tagline: "Know your options before you decide.",
@@ -91,4 +91,4 @@ export const SITE = {
 } as const;
 
 export const DISCLAIMER =
-  "DCredit is an international planned-care decision and coordination platform. We are not a hospital, physician, insurer, emergency medical service or diagnostic service. Information on this website is educational and for coordination. It is not medical advice, diagnosis, treatment or medical clearance. The current $5 Initial Assessment is a conversation with DCredit, not a clinical assessment, specialist opinion, insurance verification or medical-record review. DCredit does not currently operate a medical-record vault. Treatment decisions must be made between you and qualified healthcare professionals. Costs, availability, treatment plans, outcomes and travel requirements vary. No medical outcome or savings are guaranteed. Always consult your own healthcare professionals and, where relevant, your insurer or funding body before making decisions about cross-border care. Health-privacy rules differ by country. For example, in the United States, this website does not claim HIPAA compliance.";
+  "CareJourney India is an international planned-care decision and coordination platform. We are not a hospital, physician, insurer, emergency medical service or diagnostic service. Information on this website is educational and for coordination. It is not medical advice, diagnosis, treatment or medical clearance. The current $5 Initial Assessment is a conversation with CareJourney India, not a clinical assessment, specialist opinion, insurance verification or medical-record review. CareJourney India does not currently operate a medical-record vault. Treatment decisions must be made between you and qualified healthcare professionals. Costs, availability, treatment plans, outcomes and travel requirements vary. No medical outcome or savings are guaranteed. Always consult your own healthcare professionals and, where relevant, your insurer or funding body before making decisions about cross-border care. Health-privacy rules differ by country. For example, in the United States, this website does not claim HIPAA compliance.";

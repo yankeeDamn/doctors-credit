@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CostCalculator from "@/components/CostCalculator";
 
-export const metadata = { title: "Cost calculator | Doctor's Credit" };
+export const metadata = { title: "Cost calculator | CareJourney India" };
 
 export default function CostPage() {
   return (

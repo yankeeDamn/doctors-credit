@@ -18,6 +18,7 @@ export type CommonMessages = {
     treatments: string;
     hospitals: string;
     costCalculator: string;
+    compareCosts: string;
     research: string;
     stories: string;
     about: string;
@@ -40,7 +41,7 @@ export type CommonMessages = {
 
 const en: CommonMessages = {
   emergencyBar:
-    "DCredit does not handle medical emergencies. Use your local emergency number. In the United States, call 911.",
+    "CareJourney India does not handle medical emergencies. Use your local emergency number. In the United States, call 911.",
   skip: "Skip to content",
   nav: {
     primary: "Primary",
@@ -48,6 +49,7 @@ const en: CommonMessages = {
     treatments: "Treatments",
     hospitals: "Hospitals",
     costCalculator: "Cost calculator",
+    compareCosts: "Compare costs",
     research: "Research",
     stories: "Patient stories",
     about: "About",
@@ -66,7 +68,7 @@ const en: CommonMessages = {
   },
   whatsapp: {
     label: "Chat on WhatsApp",
-    aria: "Chat with Doctor's Credit on WhatsApp (opens in a new tab)",
+    aria: "Chat on WhatsApp with CareJourney India (opens in a new tab)",
     privacyNote:
       "Please do not send medical records or other sensitive clinical documents through WhatsApp.",
     greeting:
@@ -76,7 +78,7 @@ const en: CommonMessages = {
 
 const es: CommonMessages = {
   emergencyBar:
-    "DCredit no atiende emergencias médicas. Use el número de emergencias de su localidad. En Estados Unidos, llame al 911.",
+    "CareJourney India no atiende emergencias médicas. Use el número de emergencias de su localidad. En Estados Unidos, llame al 911.",
   skip: "Ir al contenido",
   nav: {
     primary: "Principal",
@@ -84,6 +86,7 @@ const es: CommonMessages = {
     treatments: "Tratamientos",
     hospitals: "Hospitales",
     costCalculator: "Calculadora",
+    compareCosts: "Comparar costos",
     research: "Investigación",
     stories: "Historias",
     about: "Nosotros",
@@ -102,7 +105,7 @@ const es: CommonMessages = {
   },
   whatsapp: {
     label: "Escríbanos por WhatsApp",
-    aria: "Chatear con Doctor's Credit por WhatsApp (se abre en una pestaña nueva)",
+    aria: "Escríbanos por WhatsApp: CareJourney India (se abre en una pestaña nueva)",
     privacyNote:
       "Por favor, no envíe historiales médicos ni otros documentos clínicos sensibles por WhatsApp.",
     greeting:
@@ -112,7 +115,7 @@ const es: CommonMessages = {
 
 const hi: CommonMessages = {
   emergencyBar:
-    "DCredit चिकित्सा आपात स्थितियों को नहीं संभालता। अपने स्थानीय आपातकालीन नंबर का उपयोग करें। संयुक्त राज्य अमेरिका में 911 पर कॉल करें।",
+    "CareJourney India चिकित्सा आपात स्थितियों को नहीं संभालता। अपने स्थानीय आपातकालीन नंबर का उपयोग करें। संयुक्त राज्य अमेरिका में 911 पर कॉल करें।",
   skip: "मुख्य सामग्री पर जाएँ",
   nav: {
     primary: "मुख्य",
@@ -120,6 +123,7 @@ const hi: CommonMessages = {
     treatments: "उपचार",
     hospitals: "अस्पताल",
     costCalculator: "लागत कैलकुलेटर",
+    compareCosts: "लागत की तुलना",
     research: "शोध",
     stories: "मरीज़ों की कहानियाँ",
     about: "हमारे बारे में",
@@ -138,7 +142,7 @@ const hi: CommonMessages = {
   },
   whatsapp: {
     label: "WhatsApp पर चैट करें",
-    aria: "Doctor's Credit से WhatsApp पर चैट करें (नए टैब में खुलता है)",
+    aria: "WhatsApp पर चैट करें: CareJourney India (नए टैब में खुलता है)",
     privacyNote:
       "कृपया WhatsApp के माध्यम से मेडिकल रिकॉर्ड या अन्य संवेदनशील क्लिनिकल दस्तावेज़ न भेजें।",
     greeting:

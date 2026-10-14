@@ -4,7 +4,7 @@ import { FeedbackSlider } from "@/components/editorial/FeedbackSlider";
 import { DISCLAIMER } from "@/lib/contact";
 import { STORY_CONSENT_COPY, publishedStories } from "@/lib/patient-stories";
 
-export const metadata = { title: "Patient stories | Doctor's Credit" };
+export const metadata = { title: "Patient stories | CareJourney India" };
 
 export default function StoriesPage() {
   const stories = publishedStories();
@@ -27,7 +27,7 @@ export default function StoriesPage() {
                 : STORY_CONSENT_COPY}
             </p>
             <p>
-              Real experiences, shared by patients. DCredit does not invent
+              Real experiences, shared by patients. CareJourney India does not invent
               names, photographs or outcomes for this page.
             </p>
             <p className="story-cta">

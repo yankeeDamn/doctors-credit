@@ -27,7 +27,7 @@ const FACTORS = [
     label: "Access & timing",
     layer: "Access",
     href: "/how-it-works",
-    text: "Availability and wait times can shape whether travel is even worth investigating. See how DCredit frames the decision.",
+    text: "Availability and wait times can shape whether travel is even worth investigating. See how CareJourney India frames the decision.",
   },
   {
     id: "value",

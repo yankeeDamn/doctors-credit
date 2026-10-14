@@ -30,7 +30,7 @@ export function FeedbackSlider({
     <aside
       className={`ed-slider ed-slider-${variant}`}
       aria-roledescription="carousel"
-      aria-label="How DCredit shares stories and advice"
+      aria-label="How CareJourney India shares stories and advice"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -39,7 +39,7 @@ export function FeedbackSlider({
         <img
           key={slide.src + slide.position}
           src={slide.src}
-          alt="Editorial portrait used to illustrate DCredit story publication. Not a DCredit patient."
+          alt="Editorial portrait used to illustrate CareJourney India story publication. Not a CareJourney India patient."
           style={{ objectPosition: slide.position }}
         />
         <figcaption className="ed-slider-copy" aria-live="polite">

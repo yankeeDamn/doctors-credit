@@ -27,13 +27,13 @@ export const PACKAGES: CarePackage[] = [
     available: true,
     featured: true,
     blurb:
-      "Talk with a DCredit care coordinator about what you are considering, your goals, timing and whether exploring care in India may make sense for you.",
+      "Talk with a CareJourney India care coordinator about what you are considering, your goals, timing and whether exploring care in India may make sense for you.",
     includes: [
-      "A conversation with a DCredit care coordinator",
+      "A conversation with a CareJourney India care coordinator",
       "Discussion of the care you are considering",
       "Discussion of your healthcare coverage or funding situation, not a benefits verification",
       "Discussion of your timeline and goals",
-      "An explanation of how DCredit works",
+      "An explanation of how CareJourney India works",
       "Help deciding whether exploring India may be worth investigating further",
       "A list of information you may later need to gather",
       "An explanation of possible next steps",

@@ -5,6 +5,8 @@
   --navy-mid: #0d5aa7;
   --teal: #12a392;
   --teal-bright: #28d2b8;
+  /* Teal for text on light backgrounds: 4.8:1 or better on every paper tone (the brand teal is 2.8 to 3.1). */
+  --teal-ink: #0a7568;
   --ink: #102033;
   --muted: #5c6b7a;
   --line: rgba(6, 45, 86, 0.12);
@@ -88,9 +90,13 @@ body {
   clip: rect(0, 0, 0, 0);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Layered so Tailwind utilities (text-white, underline, ...) can still style a link. An unlayered
+   `a { color: inherit }` beat every text-* class and turned white button text dark. */
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 button,
@@ -142,33 +148,138 @@ section {
 .brand-lockup {
   display: inline-flex;
   align-items: center;
+  gap: 0.6rem;
   background: transparent;
-  line-height: 0;
+  color: var(--navy);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.brand-img {
+.brand-mark {
   display: block;
-  width: auto;
-  height: auto;
-  background: transparent;
+  flex: none;
 }
 
-.brand-img-nav {
-  height: 2.35rem;
+.brand-mark-nav {
+  width: 2.3rem;
+  height: 2.3rem;
+  transition:
+    width 400ms ease,
+    height 400ms ease;
 }
 
-.nav.is-scrolled .brand-img-nav {
-  height: 2.05rem;
+.nav.is-scrolled .brand-mark-nav {
+  width: 2rem;
+  height: 2rem;
 }
 
-.brand-img-footer {
-  width: min(15.25rem, 100%);
-  height: auto;
+.brand-mark-footer {
+  width: 3rem;
+  height: 3rem;
 }
 
-.brand-img-mark {
-  height: 2.8rem;
+.brand-mark-mark {
   width: 2.8rem;
+  height: 2.8rem;
+}
+
+.brand-word {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.brand-word-nav {
+  font-size: 1.28rem;
+}
+
+.brand-word-footer {
+  font-size: 1.7rem;
+}
+
+.brand-word-sub {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--teal-ink);
+}
+
+/* The mark's route draws itself once when the page loads, then the destination dot lands. */
+.brand-mark-route {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.brand-mark-dest {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand-mark-route {
+    animation: brand-route 1.1s 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .brand-mark-dest {
+    animation: brand-dest 0.45s 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+}
+
+@keyframes brand-route {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes brand-dest {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-lockup {
+    gap: 0.45rem;
+  }
+  .brand-mark-nav,
+  .nav.is-scrolled .brand-mark-nav {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  /* vw caps the size so Hindi, whose root font size is larger, still fits beside the menu button. */
+  .brand-word-nav {
+    font-size: min(1.02rem, 4.2vw);
+  }
+  .brand-mark-footer {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .brand-word-footer {
+    font-size: min(1.7rem, 6vw);
+  }
+}
+
+/* 320 to 360px phones: logo, language picker and menu button together were 36px too wide. */
+@media (max-width: 360px) {
+  .nav {
+    gap: 0.5rem;
+    padding-inline: 4vw;
+  }
+  .brand-lockup {
+    gap: 0.35rem;
+  }
+  .brand-word-nav {
+    font-size: min(0.94rem, 4.5vw);
+  }
+  .nav-toggle {
+    width: 2.4rem;
+  }
 }
 
 .nav-desktop {
@@ -212,6 +323,31 @@ section {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--navy);
+}
+
+/* A thin line under the header fills as the page scrolls: the journey bar. Scroll-driven animation
+   is progressive enhancement (browsers without it simply show no bar) and is off for reduced motion. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .nav::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-bright));
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: nav-progress linear both;
+      animation-timeline: scroll(root block);
+      pointer-events: none;
+    }
+  }
+}
+
+@keyframes nav-progress {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 /* Eight links plus the call to action need about 1490px at full spacing. Tighten them on laptops
@@ -436,7 +572,7 @@ section {
 }
 
 .nav-overlay-inner a[aria-current="page"] {
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 @keyframes nav-item-in {
@@ -508,7 +644,7 @@ section {
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 h1,
@@ -662,8 +798,22 @@ h2 {
 }
 
 .hero-watch-play path {
-  fill: #fff;
-  stroke: none;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-watch:hover .hero-watch-play path {
+  transform: translateX(1.5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-watch-play path {
+    transition: none;
+  }
 }
 
 .hero-watch-copy {
@@ -913,7 +1063,7 @@ h2 {
 }
 
 .step span {
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
 }
@@ -955,7 +1105,7 @@ h2 {
 }
 
 .treat-card:hover h3 {
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .treat-card small {
@@ -964,7 +1114,7 @@ h2 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-size: 0.68rem;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .flag {
@@ -976,7 +1126,7 @@ h2 {
 }
 
 .flag-yes {
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 .flag-maybe {
   color: #8a6a12;
@@ -1052,7 +1202,7 @@ h2 {
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .verdict {
@@ -1099,6 +1249,7 @@ h2 {
 .source {
   font-size: 0.82rem;
   color: var(--muted);
+  overflow-wrap: anywhere; /* long source URLs pushed the page wider than a phone */
 }
 
 .stat-row {
@@ -1136,7 +1287,7 @@ h2 {
 }
 
 .foot-brand .brand-lockup {
-  display: inline-block;
+  display: inline-flex;
   margin-bottom: 1.15rem;
 }
 
@@ -1285,6 +1436,11 @@ h2 {
   background: var(--navy);
   color: #fff;
   font-size: 0.88rem;
+  box-shadow: 0 18px 40px -18px rgba(6, 45, 86, 0.55);
+}
+
+.cookie p {
+  margin: 0;
 }
 
 .cookie button {
@@ -1295,6 +1451,70 @@ h2 {
   min-height: 2.4rem;
   padding: 0 0.9rem;
   cursor: pointer;
+}
+
+/* On laptops a tall corner card sat on top of the hero buttons. A slim single row stays below them. */
+@media (min-width: 641px) {
+  .cookie {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    max-width: 42rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+  .cookie button {
+    flex: none;
+    margin: 0;
+  }
+}
+
+/* The banner arrives a moment after the page and leaves with a short slide, not a pop. */
+@media (prefers-reduced-motion: no-preference) {
+  .cookie {
+    animation: cookie-in 520ms 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .cookie.is-leaving {
+    animation: cookie-out 220ms ease-in both;
+  }
+}
+
+@keyframes cookie-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cookie-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* On phones the banner sat on top of the WhatsApp button and a third of the hero. Keep it smaller
+   and above the button. */
+@media (max-width: 640px) {
+  .cookie {
+    bottom: calc(5.1rem + env(safe-area-inset-bottom));
+    padding: 0.8rem 0.9rem;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+  .cookie button {
+    margin-top: 0.55rem;
+    min-height: 2.2rem;
+  }
 }
 
 .legal,
@@ -1360,7 +1580,7 @@ h2 {
 
 .ed-enroll-steps span {
   grid-row: span 2;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
 }
@@ -1692,7 +1912,7 @@ h2 {
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .account-status-value {
@@ -1741,7 +1961,7 @@ h2 {
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .account-meta dd {
@@ -1888,7 +2108,7 @@ h2 {
 .decision-layer,
 .decision-index {
   display: block;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -2138,7 +2358,7 @@ h2 {
 
 .ach-year {
   margin: 0.15rem 0 0;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2265,7 +2485,7 @@ h2 {
 .cap-icon {
   width: 1.45rem;
   height: 1.45rem;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .story-band {
@@ -2329,7 +2549,7 @@ h2 {
 .patient-story-slot,
 .story-label {
   margin: 0 0 0.5rem;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 0.64rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2479,7 +2699,7 @@ h2 {
   position: absolute;
   left: -0.55rem;
   top: 50%;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 1.1rem;
   transform: translate(-50%, -50%);
 }
@@ -2514,7 +2734,7 @@ h2 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-size: 0.68rem;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .treat-visual-body h3 {
@@ -2617,7 +2837,7 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
 }

@@ -9,7 +9,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const t = treatmentBySlug(slug);
-  return { title: t ? `${t.name} | Doctor's Credit` : "Treatment" };
+  return { title: t ? `${t.name} | CareJourney India` : "Treatment" };
 }
 
 export default async function TreatmentPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -52,7 +52,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
         Emergencies, inability to travel safely, inadequate follow-up at home,
         or cases where your real cost at home is already lower than a complete
         India journey. A lower quoted treatment price does not automatically
-        make a medical journey better. DCredit does not diagnose, clear
+        make a medical journey better. CareJourney India does not diagnose, clear
         patients for travel or recommend a specific treatment.
       </p>
       <h2>Questions to take forward</h2>

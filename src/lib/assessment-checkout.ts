@@ -49,10 +49,10 @@ export async function startAssessmentCheckout(
   if (existing?.status === "REVIEW_REQUIRED") throw new Error("This payment needs manual review. Do not pay again.");
   if (existing) {
     if (deps.provider === "cashfree" && existing.paymentProvider !== "cashfree") {
-      throw new Error("A historical provider checkout is pending. Contact DCREDIT; do not pay again.");
+      throw new Error("A historical provider checkout is pending. Contact CareJourney India; do not pay again.");
     }
     if (existing.checkoutUrl) return { order: existing, url: existing.checkoutUrl };
-    if (deps.provider !== "cashfree") throw new Error("A checkout is already pending. Do not pay again; contact DCredit if it does not resolve.");
+    if (deps.provider !== "cashfree") throw new Error("A checkout is already pending. Do not pay again; contact CareJourney India if it does not resolve.");
   }
   if (!deps.configured(patient)) throw new Error("Cashfree sandbox checkout is not configured. No payment was taken.");
   const phone = String(fields.billingPhone || patient.phone || "").trim();
@@ -77,9 +77,9 @@ export async function startAssessmentCheckout(
     });
   } catch {
     // Never put provider errors, request headers or credentials into a URL.
-    throw new Error("Test checkout could not be confirmed. Do not pay again; contact DCredit for status.");
+    throw new Error("Test checkout could not be confirmed. Do not pay again; contact CareJourney India for status.");
   }
-  if (!checkout) throw new Error("Checkout could not be confirmed. Do not pay again; contact DCredit for status.");
+  if (!checkout) throw new Error("Checkout could not be confirmed. Do not pay again; contact CareJourney India for status.");
   await repo.assessments.initiate(order.id, checkout.id, checkout.url);
   return { order, url: checkout.url };
 }

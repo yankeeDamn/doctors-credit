@@ -19,7 +19,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
     if (!order || order.identityId !== session?.patientId) return <Pending assessment copy="Open My Account to view your payment status. No payment is confirmed by this browser return." />;
     if (order.status !== "PAID") return <><Pending assessment copy={order.status === "FAILED"
       ? "Your payment failed or was declined. Open My Account before starting a new test attempt."
-      : order.status === "REVIEW_REQUIRED" ? "Your payment requires manual review. Do not pay again. Contact DCREDIT."
+      : order.status === "REVIEW_REQUIRED" ? "Your payment requires manual review. Do not pay again. Contact CareJourney India."
       : "Your payment is pending server confirmation. Do not pay again. Refresh this page or open My Account."} />
       {order.status === "PENDING" && order.paymentProvider === "cashfree" ? <div className="legal"><AssessmentPaymentStatus orderId={order.id} /></div> : null}</>;
     return (
@@ -63,7 +63,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
       {appointment?.meetingReady ? (
         <>
           <p>
-            Join your DCredit conversation:{" "}
+            Join your CareJourney India conversation:{" "}
             <a href={appointment.joinUrl}>Join Zoom meeting</a>
           </p>
           <p>Please join a few minutes before your scheduled time.</p>
@@ -85,16 +85,16 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
         </div>
       </div>
       <p>
-        This conversation is with a DCredit care coordinator. It is not a medical
+        This conversation is with a CareJourney India care coordinator. It is not a medical
         diagnosis or clinical evaluation.
       </p>
       <p>
-        DCredit will never ask for your password, banking PIN, card CVV or
+        CareJourney India will never ask for your password, banking PIN, card CVV or
         one-time authentication code.
       </p>
       <p className="fine">
         You can also <a href="/account">open My Account</a> or{" "}
-        <a href="/verify">verify a DCredit communication</a>.
+        <a href="/verify">verify a CareJourney India communication</a>.
       </p>
     </main>
   );
@@ -108,7 +108,7 @@ function Pending({ copy, assessment = false }: { copy: string; assessment?: bool
       <p>{copy}</p>
       <p><a href="/account">Open My Account</a> · <a href={assessment ? "/signin?next=%2Fsuccess%3Fassessment%3D1" : "/signin?next=/success"}>Sign in</a></p>
       <p className="fine">
-        DCredit will never ask for your password, banking PIN, card CVV or
+        CareJourney India will never ask for your password, banking PIN, card CVV or
         one-time authentication code.
       </p>
     </main>

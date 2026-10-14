@@ -4,7 +4,7 @@ import ContactForm from "@/components/ContactForm";
 import { turnstileSiteKey } from "@/lib/turnstile";
 import { getCommon } from "@/lib/i18n/server";
 
-export const metadata = { title: "Contact | Doctor's Credit" };
+export const metadata = { title: "Contact | CareJourney India" };
 
 export default async function ContactPage() {
   const { t } = await getCommon();
@@ -40,7 +40,7 @@ export default async function ContactPage() {
         <>
           <p>
             <a className="btn-ghost" href={whatsappHref(t.whatsapp.greeting)}>
-              WhatsApp DCredit
+              WhatsApp CareJourney India
             </a>
           </p>
           <p className="fine">
@@ -50,7 +50,7 @@ export default async function ContactPage() {
         </>
       ) : null}
       <p>
-        DCredit is not an emergency medical service. If you are experiencing an
+        CareJourney India is not an emergency medical service. If you are experiencing an
         emergency, use the emergency number where you are. In the United States
         that number is 911.
       </p>

@@ -171,18 +171,19 @@ export default async function Home() {
               <Link className="btn-ghost" href="/carejourney">
                 {h.compare}
               </Link>
-              <button className="hero-watch" type="button">
+              {/* There is no video yet, so this goes to the walkthrough instead of a button that did nothing. */}
+              <Link className="hero-watch" href="/how-it-works">
                 <span className="hero-watch-play" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="10.2" />
-                    <path d="M10 8.6v6.8l6-3.4z" />
+                    <path d="M8.6 12h6.6M12.8 9.2l2.8 2.8-2.8 2.8" />
                   </svg>
                 </span>
                 <span className="hero-watch-copy">
                   <strong>{h.watchTitle}</strong>
                   <small>{h.watchSub}</small>
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
           <figure className="ed-visual">
@@ -210,7 +211,8 @@ export default async function Home() {
 
       <section className="ed-band" aria-label={h.capabilitiesAria}>
         <div className="shell">
-          <ul>
+          {/* Scrolls sideways on phones, so keyboard users need to be able to focus it. */}
+          <ul tabIndex={0}>
             {h.capabilities.map((item, i) => (
               <li key={item.line}>
                 <LineIcon name={CAPABILITY_ICONS[i]} />

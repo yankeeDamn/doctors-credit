@@ -40,11 +40,20 @@ const script = Caveat({
   weight: ["500", "600"],
 });
 
+const DESCRIPTION =
+  "Explore whether medical care in India may make sense for you. Learn about India's healthcare expertise, advanced technology, hospitals, treatment options, total journey costs and practical considerations.";
+
 export const metadata: Metadata = {
   title: `${SITE.name} | Explore Medical Care in India`,
-  description:
-    "Explore whether medical care in India may make sense for you. Learn about India's healthcare expertise, advanced technology, hospitals, treatment options, total journey costs and practical considerations.",
+  description: DESCRIPTION,
+  applicationName: SITE.name,
   metadataBase: new URL("https://dcredit.in"),
+  openGraph: {
+    type: "website",
+    siteName: SITE.name,
+    title: `${SITE.name} | Explore Medical Care in India`,
+    description: DESCRIPTION,
+  },
 };
 
 export default async function RootLayout({

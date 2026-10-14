@@ -216,7 +216,8 @@ export default function WhyIndia() {
       </section>
 
       <section aria-labelledby="how-heading" className="rounded-3xl bg-slate-900 p-6 text-white sm:p-10">
-        <h2 id="how-heading" className="text-2xl font-semibold sm:text-3xl">
+        {/* The site's global h2 rule sets a navy colour that beats utility classes, so white is forced. */}
+        <h2 id="how-heading" className="text-white!">
           From first question to follow-up
         </h2>
         <Journey />

@@ -60,7 +60,7 @@ export const TREATMENTS: Treatment[] = [
     why: "Only after careful clinical review. Unstable cardiac disease is not a medical-travel case.",
     summary: "Coronary artery bypass grafting is major surgery. Fitness to travel and postoperative monitoring are decisive.",
     usNotes: "Billed charges can be very large. What you pay yourself still depends on the health system and plan where you live.",
-    indiaNotes: "DCredit will not recommend travel simply because a quote is lower. Clinical safety comes first.",
+    indiaNotes: "CareJourney India will not recommend travel simply because a quote is lower. Clinical safety comes first.",
   },
   {
     slug: "valve-replacement",
@@ -78,7 +78,7 @@ export const TREATMENTS: Treatment[] = [
     name: "Angioplasty",
     suitability: "NOT GENERALLY",
     why: "Often time-sensitive. Acute coronary syndromes require immediate local emergency care.",
-    summary: "Catheter-based treatment of coronary artery disease. Emergencies are not DCredit cases.",
+    summary: "Catheter-based treatment of coronary artery disease. Emergencies are not CareJourney India cases.",
     usNotes: "If you have chest pain or a suspected heart attack, use the emergency number where you are.",
     indiaNotes: "Elective, stable cases still require individual review by a qualified clinician before any travel discussion.",
   },
@@ -100,7 +100,7 @@ export const TREATMENTS: Treatment[] = [
     why: "Some planned oncology pathways may be coordinated; others must stay with the current care team at home.",
     summary: "Surgical oncology is not a single product. Staging, adjuvant therapy and follow-up determine travel sense.",
     usNotes: "Continuity with an oncologist at home after return is part of the decision, not an afterthought.",
-    indiaNotes: "DCredit does not independently diagnose or prescribe oncology treatment.",
+    indiaNotes: "CareJourney India does not independently diagnose or prescribe oncology treatment.",
   },
   {
     slug: "radiation",
@@ -168,7 +168,7 @@ export const TREATMENTS: Treatment[] = [
     name: "Fertility evaluation",
     suitability: "YES",
     why: "Diagnostic work-ups can sometimes be planned internationally, or used to inform a decision at home.",
-    summary: "Testing and consultation to understand fertility options. Not a diagnosis from DCredit.",
+    summary: "Testing and consultation to understand fertility options. Not a diagnosis from CareJourney India.",
     usNotes: "Work-up costs vary by clinic and healthcare coverage or funding.",
     indiaNotes: "Records should travel both ways so a clinician at home can continue care.",
   },
@@ -240,7 +240,7 @@ export const TREATMENTS: Treatment[] = [
     why: "Many neurosurgical cases are urgent or require immediate local intervention.",
     summary: "Not a default medical-travel product. Selected planned cases need individual review by a qualified clinician.",
     usNotes: "If this is an emergency, seek local emergency care.",
-    indiaNotes: "DCredit does not coordinate emergencies.",
+    indiaNotes: "CareJourney India does not coordinate emergencies.",
   },
   {
     slug: "movement-disorders",
@@ -278,7 +278,7 @@ export const TREATMENTS: Treatment[] = [
     name: "Kidney transplant",
     suitability: "NOT GENERALLY",
     why: "Transplant involves organ-allocation, legal, ethical and long-term immunosuppression issues that are not a simple price comparison.",
-    summary: "DCredit does not market transplant as a packaged medical-tourism product.",
+    summary: "CareJourney India does not market transplant as a packaged medical-tourism product.",
     usNotes: "Transplant is highly regulated in many countries. Travel for transplant requires specialist legal and clinical advice.",
     indiaNotes: "Organ transplantation is subject to Indian law. We will not imply that travel is automatically appropriate.",
   },
@@ -290,7 +290,7 @@ export const TREATMENTS: Treatment[] = [
     why: "Not a standard elective medical-travel offering. Legal and clinical constraints are substantial.",
     summary: "Requires specialized transplant programs and long-term follow-up.",
     usNotes: "Not an emergency-avoidance shortcut.",
-    indiaNotes: "DCredit will not recommend transplant travel solely because a quote appears lower.",
+    indiaNotes: "CareJourney India will not recommend transplant travel solely because a quote appears lower.",
   },
 ];
 

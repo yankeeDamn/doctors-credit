@@ -104,20 +104,20 @@ export default function LanguageSelector({
       <button
         ref={buttonRef}
         type="button"
-        aria-label={`${t.language.change}: ${current.name}`}
+        aria-label={`${t.language.change}: ${current.name} (${current.short})`}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listId : undefined}
         onClick={() => (open ? close(false) : openMenu())}
         onKeyDown={onButtonKeyDown}
         className={`inline-flex cursor-pointer items-center gap-1.5 border border-[color:var(--line)] bg-transparent font-medium uppercase leading-none tracking-[0.14em] text-[color:var(--navy)] transition-colors duration-200 hover:border-[color:var(--navy)] active:scale-[0.97] motion-reduce:transition-none ${
-          compact ? "h-8 px-2.5 text-[0.68rem]" : "h-10 px-2.5 text-[0.72rem] sm:px-3"
+          compact ? "h-8 px-2.5 text-[0.68rem]" : "h-10 px-2.5 text-[0.72rem] max-[360px]:gap-1 max-[360px]:px-2 sm:px-3"
         }`}
       >
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
-          className="h-4 w-4 shrink-0"
+          className="h-4 w-4 shrink-0 max-[360px]:hidden"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"

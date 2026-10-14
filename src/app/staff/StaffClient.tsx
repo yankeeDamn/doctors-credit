@@ -128,8 +128,8 @@ export default function StaffClient({
           </p>
           <h3>Outbound call script</h3>
           <blockquote>
-            Hello, this is {found.assignedCoordinator || "[Name]"} calling from DCredit. Before we
-            discuss your application, for your security, may I have your DCredit Conversation
+            Hello, this is {found.assignedCoordinator || "[Name]"} calling from CareJourney India. Before we
+            discuss your application, for your security, may I have your CareJourney India Conversation
             Verification ID?
           </blockquote>
           <h3>If the patient calls</h3>

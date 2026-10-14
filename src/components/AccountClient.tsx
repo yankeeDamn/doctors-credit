@@ -99,7 +99,7 @@ export default function AccountClient({ siteKey }: { siteKey?: string }) {
     <div className="account">
       {params.get("signedIn") || params.get("welcome") ? (
         <p className="welcome">
-          You are signed in. This account is for your DCredit assessment, not a
+          You are signed in. This account is for your CareJourney India assessment, not a
           medical record.
         </p>
       ) : null}
@@ -216,7 +216,7 @@ export default function AccountClient({ siteKey }: { siteKey?: string }) {
           Important
         </p>
         <p>
-          This conversation is with a DCredit care coordinator. It is not a
+          This conversation is with a CareJourney India care coordinator. It is not a
           medical diagnosis or clinical evaluation.
         </p>
         <p>Clinical invoices from hospitals never appear here.</p>

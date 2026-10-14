@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SOURCES } from "@/lib/sources";
 
-export const metadata = { title: "Hospitals | Doctor's Credit" };
+export const metadata = { title: "Hospitals | CareJourney India" };
 
 export default function HospitalsPage() {
   return (
@@ -9,14 +9,14 @@ export default function HospitalsPage() {
       <p className="eyebrow">Hospitals</p>
       <h1>Provider-level evidence matters.</h1>
       <p>
-        DCredit will publish provider information only when it can be checked
+        CareJourney India will publish provider information only when it can be checked
         against reliable sources. Capabilities vary by hospital, department and
         physician. A directory of names and logos is how medical-tourism sites
         manufacture trust. We will not invent hospitals, logos or outcomes.
-        DCredit does not operate or own hospitals.
+        CareJourney India does not operate or own hospitals.
       </p>
       <p>
-        We are building DCredit in stages, starting with the decision itself.
+        We are building CareJourney India in stages, starting with the decision itself.
         This page is not an operational hospital marketplace.
       </p>
       <h2>What a future profile may contain</h2>

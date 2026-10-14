@@ -1,6 +1,6 @@
 import RealityCheck from "@/components/RealityCheck";
 
-export const metadata = { title: "Reality check | Doctor's Credit" };
+export const metadata = { title: "Reality check | CareJourney India" };
 
 export default function RealityPage() {
   return (

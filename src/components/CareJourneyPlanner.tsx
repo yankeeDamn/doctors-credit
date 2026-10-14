@@ -461,7 +461,7 @@ export default function CareJourneyPlanner({ siteKey }: { siteKey?: string }) {
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-600">
               Your current comparison for <strong>{procedure.name}</strong> travels with the request, so your coordinator starts from your numbers.
-              Opinions come from treating physicians after they review your records. {`Doctor's Credit`} coordinates and is not a clinic.
+              Opinions come from treating physicians after they review your records. {`CareJourney India`} coordinates and is not a clinic.
             </p>
             <div className="mt-6">
               <LeadForm siteKey={siteKey} procedureName={procedure.name} currency={currency} summaryText={summaryText} />

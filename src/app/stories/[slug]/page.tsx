@@ -23,8 +23,8 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const story = publishedStoryBySlug(slug);
-  if (!story) return { title: "Patient story | Doctor's Credit" };
-  return { title: `${story.title} | Doctor's Credit` };
+  if (!story) return { title: "Patient story | CareJourney India" };
+  return { title: `${story.title} | CareJourney India` };
 }
 
 export default async function PatientStoryPage({

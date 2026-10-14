@@ -7,7 +7,7 @@ import { cashfreeOrderId, cashfreeUsdAllowed } from "@/lib/payment-providers/cas
 import { getRepository } from "@/lib/repo";
 import { getSession } from "@/lib/session";
 
-export const metadata = { title: "Sandbox assessment checkout | DCREDIT" };
+export const metadata = { title: "Sandbox assessment checkout | CareJourney India" };
 export default async function CheckoutPage({ searchParams }: { searchParams: Promise<{ order?: string }> }) {
   const { order: id } = await searchParams;
   const session = await getSession();
