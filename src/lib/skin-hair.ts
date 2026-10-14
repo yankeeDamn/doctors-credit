@@ -1,0 +1,123 @@
+/**
+ * Types and validation shared by the SkinHairAnalyzer component and POST /api/analyze-patient.
+ * Nothing here touches the server or the browser, so both sides can import it.
+ */
+
+export interface SkinHairReport {
+  observations: string;
+  current_situation: string;
+  suggestions: string[];
+  disclaimer: string;
+}
+
+export interface AnalyzeRequestBody {
+  /** A data:image/jpeg;base64,... URL produced by the in-browser canvas compressor. */
+  image: string;
+  /** What the person is noticing, in their own words. May be empty. */
+  description: string;
+}
+
+export type AnalyzeResponseBody = { report: SkinHairReport } | { error: string };
+
+export const MAX_DESCRIPTION_CHARS = 1000;
+
+/**
+ * An 800px JPEG at quality 0.7 is normally 60 to 200 KB. This ceiling (about 750 KB of image)
+ * leaves generous headroom while still refusing anything that skipped the compressor.
+ */
+export const MAX_IMAGE_DATA_URL_CHARS = 1_000_000;
+
+export const JPEG_DATA_URL_PREFIX = "data:image/jpeg;base64,";
+
+export const DEFAULT_DISCLAIMER =
+  "This is an AI analysis, not a medical diagnosis. It cannot replace an examination. Please consult a doctor, especially if the area is painful, changing quickly, bleeding or spreading.";
+
+const BASE64 = /^[A-Za-z0-9+/]+={0,2}$/;
+
+/** True for a compressed JPEG data URL. JPEG files start FF D8 FF, which base64 encodes as "/9j/". */
+export function isJpegDataUrl(value: unknown): value is string {
+  if (typeof value !== "string" || value.length > MAX_IMAGE_DATA_URL_CHARS) return false;
+  if (!value.startsWith(JPEG_DATA_URL_PREFIX)) return false;
+  const data = value.slice(JPEG_DATA_URL_PREFIX.length);
+  return data.length > 100 && data.startsWith("/9j/") && BASE64.test(data);
+}
+
+export type ValidatedAnalyzeRequest =
+  | { ok: true; image: string; description: string }
+  | { ok: false; error: string };
+
+export function validateAnalyzeRequest(body: unknown): ValidatedAnalyzeRequest {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return { ok: false, error: "Invalid request." };
+  }
+  const { image, description } = body as Record<string, unknown>;
+  if (!isJpegDataUrl(image)) {
+    return { ok: false, error: "Please add a photo and try again." };
+  }
+  if (description !== undefined && typeof description !== "string") {
+    return { ok: false, error: "Invalid request." };
+  }
+  const text = (description ?? "").trim();
+  if (text.length > MAX_DESCRIPTION_CHARS) {
+    return { ok: false, error: `Please keep the description under ${MAX_DESCRIPTION_CHARS} characters.` };
+  }
+  return { ok: true, image, description: text };
+}
+
+function clean(value: unknown, max: number): string {
+  if (typeof value === "string") return value.trim().slice(0, max);
+  // Models occasionally return a list of sentences where one string was asked for.
+  if (Array.isArray(value)) {
+    return value
+      .filter((part): part is string => typeof part === "string")
+      .join(" ")
+      .trim()
+      .slice(0, max);
+  }
+  return "";
+}
+
+/**
+ * Turns the model's JSON text into a report we can safely render, or null if it is unusable.
+ * The disclaimer never depends on the model: if it is missing, a standard one is filled in.
+ */
+export function parseReport(raw: string | null | undefined): SkinHairReport | null {
+  if (!raw) return null;
+  let data: unknown;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    return null;
+  }
+  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
+  const o = data as Record<string, unknown>;
+
+  const observations = clean(o.observations, 2000);
+  if (!observations) return null;
+
+  const tips = Array.isArray(o.suggestions) ? o.suggestions : typeof o.suggestions === "string" ? [o.suggestions] : [];
+  const suggestions = tips
+    .map((tip) => clean(tip, 400))
+    .filter(Boolean)
+    .slice(0, 8);
+
+  return {
+    observations,
+    current_situation: clean(o.current_situation, 2000),
+    suggestions,
+    disclaimer: clean(o.disclaimer, 600) || DEFAULT_DISCLAIMER,
+  };
+}
+
+/** Client-side guard for what comes back over the wire. */
+export function isSkinHairReport(value: unknown): value is SkinHairReport {
+  if (!value || typeof value !== "object") return false;
+  const r = value as Record<string, unknown>;
+  return (
+    typeof r.observations === "string" &&
+    typeof r.current_situation === "string" &&
+    typeof r.disclaimer === "string" &&
+    Array.isArray(r.suggestions) &&
+    r.suggestions.every((tip) => typeof tip === "string")
+  );
+}
