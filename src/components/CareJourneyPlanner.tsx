@@ -174,7 +174,7 @@ export default function CareJourneyPlanner({ siteKey }: { siteKey?: string }) {
 
         <div className="mx-auto mt-10 w-full max-w-6xl rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-lg shadow-slate-200/70 sm:p-7">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-            <h2 className="text-lg font-semibold text-slate-900 sm:text-xl">{procedure.name}: the gap in one picture</h2>
+            <h2 className="m-0! max-w-none! text-lg! font-semibold! leading-snug! tracking-normal! text-slate-900! sm:text-xl!">{procedure.name}: the gap in one picture</h2>
             <p className="text-sm text-slate-600">Follows the numbers you set below.</p>
           </div>
           <div className="mt-5 max-w-3xl">

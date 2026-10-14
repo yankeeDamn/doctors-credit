@@ -214,6 +214,29 @@ section {
   color: var(--navy);
 }
 
+/* Eight links plus the call to action need about 1490px at full spacing. Tighten them on laptops
+   rather than letting the row run underneath the logo. */
+@media (max-width: 1499px) {
+  .nav {
+    padding-inline: 3vw;
+  }
+  .nav-desktop {
+    gap: 0.55rem 0.62rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+  }
+  .nav-desktop .nav-cta {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    padding-inline: 0.7rem;
+  }
+  .nav-desktop .nav-account {
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+}
+
 .nav-cta {
   white-space: nowrap;
   flex: 0 0 auto;
@@ -361,6 +384,18 @@ section {
 .nav.is-open {
   background: var(--paper);
   z-index: 80;
+}
+
+/* Below this width the full link row no longer fits, so use the menu button. The site's other
+   layout changes stay at 980px. */
+@media (max-width: 1230px) {
+  .nav-desktop {
+    display: none;
+  }
+  .nav-toggle {
+    display: grid;
+    place-items: center;
+  }
 }
 
 .nav-overlay {
