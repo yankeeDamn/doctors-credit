@@ -45,8 +45,11 @@ export async function GET(req: NextRequest) {
       name: google.name,
       googleSub: google.sub,
     });
-  } catch {
-    return fail("account_conflict");
+  } catch (error) {
+    // Only a real email/Google-account clash is a conflict. Anything else (for example no database
+    // on this host) is a setup problem, and saying "conflict" would send people the wrong way.
+    const conflict = error instanceof Error && error.message.startsWith("Email is linked to another Google account");
+    return fail(conflict ? "account_conflict" : "storage_unavailable");
   }
 
   const dest = new URL(safeNext(oauth.next), origin);

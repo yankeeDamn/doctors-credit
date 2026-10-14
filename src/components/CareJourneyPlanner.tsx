@@ -1,8 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import { BadgeCheck, CircleDollarSign, Download, Hospital, Loader2, RotateCcw, ShieldCheck, Sparkles } from "lucide-react";
+import CostGap from "@/components/carejourney/CostGap";
+import AnimatedNumber from "@/components/motion/AnimatedNumber";
 import ComparisonViz from "@/components/carejourney/ComparisonVizSection";
 import LeadForm from "@/components/carejourney/LeadForm";
 import ProcedurePicker from "@/components/carejourney/ProcedurePicker";
@@ -132,7 +134,7 @@ export default function CareJourneyPlanner({ siteKey }: { siteKey?: string }) {
       <section className="relative overflow-hidden border-b border-slate-200 bg-[radial-gradient(circle_at_12%_20%,rgba(2,132,199,0.14),transparent_46%),radial-gradient(circle_at_90%_30%,rgba(16,185,129,0.16),transparent_44%),linear-gradient(180deg,#f8fcff_0%,#eef8ff_100%)] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-start">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <p className="inline-flex items-center gap-2 rounded-full border border-sky-300 bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-sky-800">
+            <p className="inline-flex items-center gap-2 rounded-full border border-sky-300 bg-white/90 px-3 py-1 text-sm font-semibold text-sky-800">
               <Sparkles aria-hidden="true" className="h-3.5 w-3.5" />
               CareJourney India
             </p>
@@ -169,6 +171,16 @@ export default function CareJourneyPlanner({ siteKey }: { siteKey?: string }) {
             ) : null}
           </motion.div>
         </div>
+
+        <div className="mx-auto mt-10 w-full max-w-6xl rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-lg shadow-slate-200/70 sm:p-7">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+            <h2 className="m-0! max-w-none! text-lg! font-semibold! leading-snug! tracking-normal! text-slate-900! sm:text-xl!">{procedure.name}: the gap in one picture</h2>
+            <p className="text-sm text-slate-600">Follows the numbers you set below.</p>
+          </div>
+          <div className="mt-5 max-w-3xl">
+            <CostGap homeTotal={home.total} india={india} currency={currency} />
+          </div>
+        </div>
       </section>
 
       {/* Calculator */}
@@ -182,23 +194,35 @@ export default function CareJourneyPlanner({ siteKey }: { siteKey?: string }) {
               <p className="mt-1 text-sm text-slate-600">Adjust any number. The comparison updates as you type.</p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <div role="group" aria-label="Currency" className="flex flex-wrap gap-1.5">
-                {CURRENCY_ORDER.map((code) => (
-                  <button
-                    key={code}
-                    type="button"
-                    aria-pressed={currency === code}
-                    onClick={() => setCurrency(code)}
-                    className={`rounded-full border px-3 py-1.5 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 ${
-                      currency === code
-                        ? "border-sky-700 bg-sky-700 text-white"
-                        : "border-slate-300 bg-white text-slate-700 hover:border-sky-500 hover:text-sky-800"
-                    }`}
-                  >
-                    {CURRENCIES[code].symbol} {code}
-                  </button>
-                ))}
-              </div>
+              <LayoutGroup id="currency">
+                <div role="group" aria-label="Currency" className="flex flex-wrap gap-1.5">
+                  {CURRENCY_ORDER.map((code) => (
+                    <button
+                      key={code}
+                      type="button"
+                      aria-pressed={currency === code}
+                      onClick={() => setCurrency(code)}
+                      className={`relative rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 ${
+                        currency === code
+                          ? "border-sky-700 text-white"
+                          : "border-slate-300 bg-white text-slate-700 hover:border-sky-500 hover:text-sky-800"
+                      }`}
+                    >
+                      {currency === code ? (
+                        <motion.span
+                          layoutId="currency-pill"
+                          aria-hidden="true"
+                          className="absolute -inset-px rounded-full bg-sky-700"
+                          transition={{ type: "spring", stiffness: 500, damping: 38 }}
+                        />
+                      ) : null}
+                      <span className="relative">
+                        {CURRENCIES[code].symbol} {code}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </LayoutGroup>
               <button
                 type="button"
                 onClick={resetAll}
@@ -304,7 +328,9 @@ export default function CareJourneyPlanner({ siteKey }: { siteKey?: string }) {
 
               <div className="mt-6 rounded-xl bg-slate-100 p-4">
                 <p className="text-sm font-medium text-slate-700">Estimated Total Out-of-Pocket Expense</p>
-                <p className="mt-1 text-3xl font-semibold tabular-nums text-slate-900">{money(home.total)}</p>
+                <p className="mt-1 text-3xl font-semibold tabular-nums text-slate-900">
+                  <AnimatedNumber value={home.total} format={money} duration={0.5} />
+                </p>
                 {mode === "insured" ? (
                   <p className="mt-1 text-xs text-slate-700">
                     {home.capApplied
@@ -390,7 +416,9 @@ export default function CareJourneyPlanner({ siteKey }: { siteKey?: string }) {
                   </div>
                 </dl>
                 <p className="mt-3 text-sm font-medium text-slate-700">Estimated Total Journey Cost</p>
-                <p className="mt-1 text-3xl font-semibold tabular-nums text-slate-900">{money(india.total)}</p>
+                <p className="mt-1 text-3xl font-semibold tabular-nums text-slate-900">
+                  <AnimatedNumber value={india.total} format={money} duration={0.5} />
+                </p>
               </div>
             </article>
           </div>

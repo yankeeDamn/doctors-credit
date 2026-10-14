@@ -40,6 +40,18 @@ export type PagesMessages = {
     copy: string;
   };
   home: {
+    /** Homepage worked example of the cost comparison. */
+    costGap: {
+      cta: string;
+      note: string;
+      caption: string;
+      atHome: string;
+      india: string;
+      lower: string;
+      higher: string;
+      same: string;
+      split: string;
+    };
     heroAria: string;
     heroLabel: string;
     heroBefore: string;
@@ -160,6 +172,17 @@ const en: PagesMessages = {
     copy: "© 2026 Doctor's Credit. All rights reserved.",
   },
   home: {
+    costGap: {
+      cta: "Compare your procedure",
+      note: "Planning estimate, not a quote. Savings are not guaranteed, and sometimes care at home costs less.",
+      caption: "Total knee replacement, example in US dollars",
+      atHome: "At home (self-pay, U.S. example)",
+      india: "India journey",
+      lower: "{amount} lower in India",
+      higher: "{amount} higher in India",
+      same: "About the same",
+      split: "Treatment is {pct}% of the India total. The rest is travel, stay, visa and follow-up.",
+    },
     heroAria: "Doctor's Credit homepage",
     heroLabel: "World-class care. A brighter tomorrow.",
     heroBefore: "India is a global destination for ",
@@ -386,6 +409,17 @@ const es: PagesMessages = {
     copy: "© 2026 Doctor's Credit. Todos los derechos reservados.",
   },
   home: {
+    costGap: {
+      cta: "Compare su procedimiento",
+      note: "Estimación de planificación, no un presupuesto. Los ahorros no están garantizados y, a veces, la atención en casa cuesta menos.",
+      caption: "Prótesis total de rodilla, ejemplo en dólares estadounidenses",
+      atHome: "En casa (pago propio, ejemplo de EE. UU.)",
+      india: "Viaje a la India",
+      lower: "{amount} menos en la India",
+      higher: "{amount} más en la India",
+      same: "Aproximadamente igual",
+      split: "El tratamiento es el {pct}% del total en la India. El resto es viaje, estancia, visa y seguimiento.",
+    },
     heroAria: "Página de inicio de Doctor's Credit",
     heroLabel: "Atención de clase mundial. Un mañana más luminoso.",
     heroBefore: "La India es un destino global para ",
@@ -616,6 +650,17 @@ const hi: PagesMessages = {
     copy: "© 2026 Doctor's Credit. सर्वाधिकार सुरक्षित।",
   },
   home: {
+    costGap: {
+      cta: "अपनी प्रक्रिया की तुलना करें",
+      note: "यह योजना के लिए अनुमान है, कोटेशन नहीं। बचत की गारंटी नहीं है, और कभी-कभी घर पर इलाज कम खर्च में हो जाता है।",
+      caption: "कुल घुटना प्रत्यारोपण, अमेरिकी डॉलर में उदाहरण",
+      atHome: "घर पर (स्वयं भुगतान, अमेरिका का उदाहरण)",
+      india: "भारत की यात्रा",
+      lower: "भारत में {amount} कम",
+      higher: "भारत में {amount} अधिक",
+      same: "लगभग बराबर",
+      split: "भारत के कुल खर्च में इलाज का हिस्सा {pct}% है। बाकी यात्रा, ठहरना, वीज़ा और फ़ॉलो-अप है।",
+    },
     heroAria: "Doctor's Credit का होमपेज",
     heroLabel: "विश्व-स्तरीय देखभाल। एक बेहतर कल।",
     heroBefore: "भारत ",

@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import BrandLockup from "@/components/BrandLockup";
 import LanguageSelector from "@/components/LanguageSelector";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -13,10 +14,13 @@ export default function Nav({ signedIn }: { signedIn: boolean }) {
     ["/treatments", t.nav.treatments],
     ["/hospitals", t.nav.hospitals],
     ["/carejourney", "CareJourney India"],
+    ["/cost-calculator", t.nav.costCalculator],
     ["/research", t.nav.research],
     ["/stories", t.nav.stories],
     ["/about", t.nav.about],
   ];
+  const pathname = usePathname();
+  const here = (href: string) => (pathname === href || pathname.startsWith(`${href}/`) ? "page" : undefined);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const panelId = useId();
@@ -48,7 +52,7 @@ export default function Nav({ signedIn }: { signedIn: boolean }) {
       <BrandLockup href="/" variant="nav" />
       <nav className="nav-desktop" aria-label={t.nav.primary}>
         {links.map(([href, label]) => (
-          <Link key={href} href={href}>
+          <Link key={href} href={href} aria-current={here(href)}>
             {label}
           </Link>
         ))}
@@ -77,8 +81,14 @@ export default function Nav({ signedIn }: { signedIn: boolean }) {
       {open ? (
         <div id={panelId} className="nav-overlay" role="dialog" aria-modal="true" aria-label={t.nav.menu}>
           <div className="nav-overlay-inner">
-            {links.map(([href, label]) => (
-              <Link key={href} href={href} onClick={() => setOpen(false)}>
+            {links.map(([href, label], i) => (
+              <Link
+                key={href}
+                href={href}
+                aria-current={here(href)}
+                style={{ "--i": i } as React.CSSProperties}
+                onClick={() => setOpen(false)}
+              >
                 {label}
               </Link>
             ))}

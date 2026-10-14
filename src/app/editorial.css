@@ -141,7 +141,9 @@
 .ed-slider-panel {
   justify-self: end;
   width: min(100%, 40rem);
-  margin-right: calc((100vw - min(1320px, calc(100% - 6vw))) / -2 + 3vw);
+  /* Bleed toward the viewport edge, stopping 3vw short. The shell width has to be measured against
+     the viewport: "100%" here is this grid column, which made the panel overshoot the screen. */
+  margin-right: calc((100vw - min(1320px, 94vw)) / -2 + 3vw);
 }
 
 .ed-slider-stage {
