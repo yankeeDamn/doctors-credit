@@ -371,7 +371,7 @@ export default function SkinHairAnalyzer() {
             ) : null}
 
             <p className="mt-4 text-xs leading-relaxed text-slate-600">
-              Your photo is resized on your device, then sent to an AI service to write the report. Doctor&apos;s Credit does not save it.
+              Your photo is resized on your device, then sent to an AI service to write the report. CareJourney India does not save it.
               Do not use this for an emergency. Call your local emergency number instead.
             </p>
           </div>
