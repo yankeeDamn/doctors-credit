@@ -24,7 +24,7 @@ export function MethodologyPanel() {
             <li>Statistics come from identified government, institutional or peer-reviewed sources.</li>
             <li>Institutional and hospital-reported claims are labeled as such.</li>
             <li>National statistics do not establish individual patient suitability.</li>
-            <li>DCredit is not the original source of the medical claims on this page.</li>
+            <li>CareJourney India is not the original source of the medical claims on this page.</li>
             <li>Sources may be updated over time as official records change.</li>
             <li>Information is educational and not medical advice, diagnosis or clearance.</li>
           </ul>

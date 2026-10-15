@@ -7,18 +7,18 @@ export type WhyQuestion = {
 export const WHY_DOCTORS_CREDIT: WhyQuestion[] = [
   {
     number: "01",
-    question: "Why should I start with Doctor's Credit?",
+    question: "Why should I start with CareJourney India?",
     answer: [
-      "Doctor's Credit is an international planned-care decision and coordination platform.",
+      "CareJourney India is an international planned-care decision and coordination platform.",
       "We help people considering planned care across borders understand whether India is worth investigating for their particular situation.",
       "The first conversation is about the care you are considering, not a sales pitch for a hospital.",
     ],
   },
   {
     number: "02",
-    question: "Who is DCredit for?",
+    question: "Who is CareJourney India for?",
     answer: [
-      "DCredit is for patients anywhere in the world who are considering planned care in India.",
+      "CareJourney India is for patients anywhere in the world who are considering planned care in India.",
       "Wherever you live, the question is the same: whether expertise, quality, access, travel and total cost make India worth investigating for you.",
       "When an example is about one country, we label it as such.",
     ],
@@ -34,11 +34,11 @@ export const WHY_DOCTORS_CREDIT: WhyQuestion[] = [
   },
   {
     number: "04",
-    question: "Does DCredit diagnose or treat patients?",
+    question: "Does CareJourney India diagnose or treat patients?",
     answer: [
       "No.",
-      "DCredit is not a hospital, physician, insurer or emergency service.",
-      "The $5 Initial Assessment is a conversation with DCredit, not a clinical assessment, diagnosis or medical clearance.",
+      "CareJourney India is not a hospital, physician, insurer or emergency service.",
+      "The $5 Initial Assessment is a conversation with CareJourney India, not a clinical assessment, diagnosis or medical clearance.",
     ],
   },
   {
@@ -56,7 +56,7 @@ export const WHY_DOCTORS_CREDIT: WhyQuestion[] = [
     answer: [
       "No. Capabilities vary by hospital, department and physician.",
       "Accreditation is useful information, but it is not a guarantee of outcome.",
-      "Provider-level evidence matters. DCredit will publish provider information only when it can be checked against reliable sources.",
+      "Provider-level evidence matters. CareJourney India will publish provider information only when it can be checked against reliable sources.",
     ],
   },
   {
@@ -65,7 +65,7 @@ export const WHY_DOCTORS_CREDIT: WhyQuestion[] = [
     answer: [
       "The journey does not end when treatment ends.",
       "Discharge information, medications, imaging, follow-up and communication with healthcare professionals at home belong in the plan.",
-      "DCredit does not itself provide clinical follow-up.",
+      "CareJourney India does not itself provide clinical follow-up.",
     ],
   },
   {

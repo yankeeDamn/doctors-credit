@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { INDIA_STATS, SOURCES } from "@/lib/sources";
 
-export const metadata = { title: "Research | Doctor's Credit" };
+export const metadata = { title: "Research | CareJourney India" };
 
 export default function ResearchPage() {
   return (
@@ -35,7 +35,7 @@ export default function ResearchPage() {
       <p className="source">
         Source: {SOURCES.cdcMedicalTourism.publisher}. {SOURCES.cdcMedicalTourism.url}.
         Last verified {SOURCES.cdcMedicalTourism.verified}. Label: VERIFIED
-        (agency background, not a DCredit patient count).
+        (agency background, not a CareJourney India patient count).
       </p>
 
       <h2>Coverage at home changes the math</h2>
@@ -44,7 +44,7 @@ export default function ResearchPage() {
         amount. Healthcare coverage or funding, remaining deductible where that
         applies, coinsurance, copay, out-of-pocket maximum, approved-provider
         rules and prior authorization decide what you may need to pay yourself.
-        DCredit compares likely patient responsibility, not sticker prices.
+        CareJourney India compares likely patient responsibility, not sticker prices.
       </p>
       <p>
         The on-site calculator includes one plan-math example, the kind used where

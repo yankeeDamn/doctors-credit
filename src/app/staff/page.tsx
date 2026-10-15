@@ -3,7 +3,7 @@ import { turnstileSiteKey } from "@/lib/turnstile";
 import { staffAuthenticated, staffConfigured } from "@/lib/staff-session";
 
 export const metadata = {
-  title: "Coordinator desk | DCredit",
+  title: "Coordinator desk | CareJourney India",
   robots: { index: false, follow: false },
 };
 

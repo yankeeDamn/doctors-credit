@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata = { title: "Medical travel guide | Doctor's Credit" };
+export const metadata = { title: "Medical travel guide | CareJourney India" };
 
 export default function GuidePage() {
   return (
@@ -25,11 +25,11 @@ export default function GuidePage() {
         Discharge information, medications, imaging, follow-up, travel fitness
         and communication with healthcare professionals at home all belong in
         the plan. A qualified clinician, not a website, must clear someone to
-        fly. DCredit does not itself provide clinical follow-up.
+        fly. CareJourney India does not itself provide clinical follow-up.
       </p>
       <p>
         This guide is informational. It is not medical advice, diagnosis or
-        clearance. DCredit does not currently offer a medical-record vault or
+        clearance. CareJourney India does not currently offer a medical-record vault or
         generate a return-home packet. Do not treat accreditation as an
         outcome. Do not travel for emergencies.
       </p>

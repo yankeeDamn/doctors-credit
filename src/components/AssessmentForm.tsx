@@ -39,7 +39,7 @@ export default function AssessmentForm({ patient, order, error, testCheckoutAllo
         <p>Patient Assistance &amp; Medical Coordination Fee</p>
         <p className="care-price">{price?.label || "Select and save your patient type"}</p>
         <p>One-time coordination and assistance fee. Sandbox payments verify the payment flow only; they do not start real coordination work.</p>
-        <p>This payment does not constitute medical treatment or medical advice. DCREDIT does not provide diagnosis or treatment.</p>
+        <p>This payment does not constitute medical treatment or medical advice. CareJourney India does not provide diagnosis or treatment.</p>
         <p><strong>Not included:</strong> doctor consultations, hospital charges, diagnostic tests, medicines, surgery/procedures, accommodation, travel, food, local transportation, visas, third-party fees or optional post-assessment support packages.</p>
       </div>
       <div className="enroll-error" role="status">
@@ -51,9 +51,9 @@ export default function AssessmentForm({ patient, order, error, testCheckoutAllo
       {order?.status === "PAID" ? (
         <p className="welcome">Your test payment is confirmed. <Link href="/account">View payment details</Link>. Do not pay again.</p>
       ) : order?.status === "REVIEW_REQUIRED" ? (
-        <p role="alert">Your payment needs manual review. Do not pay again. Contact DCREDIT.</p>
+        <p role="alert">Your payment needs manual review. Do not pay again. Contact CareJourney India.</p>
       ) : order?.status === "PENDING" && order.paymentProvider !== "cashfree" ? (
-        <p role="alert">A historical provider checkout is pending. Do not pay again; contact DCREDIT. Dodo checkout is no longer available.</p>
+        <p role="alert">A historical provider checkout is pending. Do not pay again; contact CareJourney India. Dodo checkout is no longer available.</p>
       ) : (
         <form action="/api/assessment/checkout" method="post">
           <input type="hidden" name="service" value={ASSESSMENT_SERVICE} />

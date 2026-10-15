@@ -6,7 +6,7 @@ const services = [
   {
     n: "01",
     t: "A clear first conversation",
-    d: "The $5 Initial Assessment is a conversation with DCredit about the care you are considering, your healthcare coverage or funding, timeline and goals, not a diagnosis.",
+    d: "The $5 Initial Assessment is a conversation with CareJourney India about the care you are considering, your healthcare coverage or funding, timeline and goals, not a diagnosis.",
     o: "You leave knowing whether exploring India may make sense.",
   },
   {
@@ -36,7 +36,7 @@ const services = [
   {
     n: "06",
     t: "Later phases, when ready",
-    d: "Future DCredit services may include deeper provider coordination and travel or care support. We will not describe those as live until they are.",
+    d: "Future CareJourney India services may include deeper provider coordination and travel or care support. We will not describe those as live until they are.",
     o: "We build in stages, starting with the decision itself.",
   },
 ];

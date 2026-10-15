@@ -18,7 +18,7 @@ import { SectionLabel } from "@/components/editorial/SectionLabel";
 import "./achievements.css";
 
 export const metadata: Metadata = {
-  title: "India's Medical Achievements | Doctor's Credit",
+  title: "India's Medical Achievements | CareJourney India",
   description:
     "Explore India's medical achievements across complex surgery, transplantation, cancer care, pharmaceuticals, vaccines, medical devices, advanced technology and digital health.",
   keywords: [
@@ -205,7 +205,7 @@ export default function IndiaMedicalAchievementsPage() {
 
       <section className="ma-view" id="dcredit-perspective">
         <div className="shell">
-          <SectionLabel>The DCredit view</SectionLabel>
+          <SectionLabel>The CareJourney India view</SectionLabel>
           <h2 className="ed-display">
             India may be worth exploring.
             <br />

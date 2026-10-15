@@ -17,7 +17,7 @@ export default function VerifyForm({ siteKey }: { siteKey?: string }) {
   return (
     <form className="enroll" onSubmit={onSubmit}>
       <label>
-        DCredit Call Verification ID
+        CareJourney India Call Verification ID
         <input
           name="callId"
           required
@@ -32,7 +32,7 @@ export default function VerifyForm({ siteKey }: { siteKey?: string }) {
       </button>
       {result === "ok" ? (
         <p className="welcome" role="status">
-          ✓ Verified DCredit Communication
+          ✓ Verified CareJourney India Communication
         </p>
       ) : null}
       {result === "no" ? (

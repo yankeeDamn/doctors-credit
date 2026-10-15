@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CATEGORIES, SUITABILITY_LABEL, TREATMENTS } from "@/lib/treatments";
 
-export const metadata = { title: "Treatments | Doctor's Credit" };
+export const metadata = { title: "Treatments | CareJourney India" };
 
 export default function TreatmentsPage() {
   return (
@@ -10,9 +10,9 @@ export default function TreatmentsPage() {
       <h1>Is this procedure often discussed for planned care abroad?</h1>
       <p>
         These notes are editorial and informational. They do not determine
-        whether an individual patient should travel, and they are not a DCredit
+        whether an individual patient should travel, and they are not a CareJourney India
         clinical review. Speak with your own healthcare professionals before
-        making a treatment decision. Emergencies are never a DCredit pathway.
+        making a treatment decision. Emergencies are never a CareJourney India pathway.
         India is a destination to investigate, not a conclusion.
       </p>
       {CATEGORIES.map((cat) => (

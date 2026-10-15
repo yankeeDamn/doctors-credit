@@ -211,7 +211,7 @@ describe("payment fulfillment", () => {
     });
     const stored = await repo.getApplicationById(app.id);
     const email = conversationConfirmationText(stored!);
-    assert.equal(topic, "DCredit Initial Assessment");
+    assert.equal(topic, "CareJourney India Initial Assessment");
     assert.equal(/knee|MRI|ZOOM_CLIENT|DODO_PAYMENTS|start_url/i.test(topic), false);
     assert.equal(/Knee replacement|ZOOM_CLIENT|DODO_PAYMENTS|start_url/i.test(email), false);
     assert.match(email, /coordinator/);

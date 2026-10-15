@@ -1,4 +1,6 @@
-# Doctor's Credit (DCredit.in)
+# CareJourney India (dcredit.in)
+
+Formerly Doctor's Credit. The domain, email addresses, cookie names and environment variables keep the old `dcredit` / `dc_` names on purpose, so nothing already deployed breaks.
 
 US→India planned-care navigation. **Not** the household-finance DCREDIT PWA, and **not** a hospital, physician, lender or emergency service.
 

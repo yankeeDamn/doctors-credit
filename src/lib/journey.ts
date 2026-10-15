@@ -2,7 +2,7 @@ export const JOURNEY = [
   {
     n: "01",
     title: "Tell us what you are considering",
-    body: "Share the care you are considering, your general situation, healthcare coverage or funding, timeline and goals. This is a conversation with DCredit, not a diagnosis or medical evaluation.",
+    body: "Share the care you are considering, your general situation, healthcare coverage or funding, timeline and goals. This is a conversation with CareJourney India, not a diagnosis or medical evaluation.",
   },
   {
     n: "02",
@@ -32,7 +32,7 @@ export const JOURNEY = [
   {
     n: "07",
     title: "Coordinate the next stage",
-    body: "We are building DCredit in stages, starting with the decision itself. Future services may include deeper provider coordination and travel or care support when those offerings become available.",
+    body: "We are building CareJourney India in stages, starting with the decision itself. Future services may include deeper provider coordination and travel or care support when those offerings become available.",
   },
 ] as const;
 
@@ -59,12 +59,12 @@ export const TRUST_PILLARS = [
   },
   {
     t: "The journey does not end when treatment ends.",
-    d: "Continuity of care and return-home planning matter. In V1 we explain why. Detailed return-home packets are a future service. DCredit does not itself provide clinical follow-up.",
+    d: "Continuity of care and return-home planning matter. In V1 we explain why. Detailed return-home packets are a future service. CareJourney India does not itself provide clinical follow-up.",
   },
 ] as const;
 
 export const PROTECT = [
-  "Patient identity verification for genuine DCredit communication",
+  "Patient identity verification for genuine CareJourney India communication",
   "No medical-record vault in V1. Do not send imaging or diagnoses here",
   "Provider profiles published only when sources can be checked",
   "Clear $5 Initial Assessment pricing",

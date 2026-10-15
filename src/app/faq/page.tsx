@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FAQS } from "@/lib/faq";
 
-export const metadata = { title: "FAQ | Doctor's Credit" };
+export const metadata = { title: "FAQ | CareJourney India" };
 
 export default function FaqPage() {
   return (

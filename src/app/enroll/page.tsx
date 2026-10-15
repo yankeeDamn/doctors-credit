@@ -12,7 +12,7 @@ function first(v: string | string[] | undefined) {
   return Array.isArray(v) ? v[0] : v;
 }
 
-export const metadata = { title: "Initial Patient Assessment | DCREDIT" };
+export const metadata = { title: "Initial Patient Assessment | CareJourney India" };
 
 const STEPS = [
   { n: "01", title: "Sign in", text: "Google opens your file before any money moves." },
@@ -50,7 +50,7 @@ export default async function EnrollPage({
             ))}
           </ol>
           <p className="ed-enroll-note">
-            DCredit is for patients anywhere in the world who are considering
+            CareJourney India is for patients anywhere in the world who are considering
             planned care in India. This fee is for coordination and assistance,
             not medical treatment, diagnosis, medical advice or medical-record intake.
             Please do not send MRI scans, prescriptions or other sensitive

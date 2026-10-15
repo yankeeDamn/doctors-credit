@@ -14,7 +14,7 @@ export default function ContactForm({ siteKey }: { siteKey?: string }) {
     const res = await fetch("/api/contact", { method: "POST", body });
     if (res.ok) {
       setStatus("ok");
-      setMessage("Message received. We will reply using the official DCredit contact details.");
+      setMessage("Message received. We will reply using the official CareJourney India contact details.");
       form.reset();
     } else {
       const data = (await res.json().catch(() => null)) as { error?: string } | null;

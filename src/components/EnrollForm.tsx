@@ -80,7 +80,7 @@ export default function EnrollForm({
         <p className="care-fee">One-time fee</p>
         <p>{assessment.blurb}</p>
         <p className="fine">
-          This conversation is with a DCredit care coordinator. It is not a
+          This conversation is with a CareJourney India care coordinator. It is not a
           medical diagnosis or clinical evaluation.
         </p>
       </div>

@@ -203,7 +203,7 @@ export function ComparisonTable({
       <h3 id="table-heading" className="text-lg font-semibold text-slate-900">
         At-a-glance comparison
       </h3>
-      <div className="mt-4 overflow-x-auto">
+      <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-labelledby="table-heading">
         <table className="w-full min-w-[34rem] text-left text-sm">
           <caption className="sr-only">Comparison of at-home costs and the complete India medical journey</caption>
           <thead>

@@ -156,20 +156,20 @@ const en: PagesMessages = {
       "Sometimes it may not.",
       "Either way, you deserve to know.",
     ],
-    aboutLabel: "About DCredit",
+    aboutLabel: "About CareJourney India",
     about:
-      "DCredit is an international planned-care decision and coordination platform. We are not a hospital, physician, insurer, emergency medical service or diagnostic service.",
+      "CareJourney India is an international planned-care decision and coordination platform. We are not a hospital, physician, insurer, emergency medical service or diagnostic service.",
     importantLabel: "Important",
     important1:
-      "Information on this website is educational and for coordination purposes. The $5 initial care conversation is with a DCredit care coordinator, not a clinical assessment, specialist opinion, diagnosis or medical-record review.",
+      "Information on this website is educational and for coordination purposes. The $5 initial care conversation is with a CareJourney India care coordinator, not a clinical assessment, specialist opinion, diagnosis or medical-record review.",
     important2:
       "Treatment decisions should be made with qualified healthcare professionals. Costs, availability, treatment plans, outcomes and travel requirements vary.",
     medicalLabel: "Medical information",
     medical:
-      "DCredit does not provide emergency medical care. If you are experiencing an emergency, contact your local emergency services.",
+      "CareJourney India does not provide emergency medical care. If you are experiencing an emergency, contact your local emergency services.",
     cross:
       "For cross-border care, consult the healthcare professionals, insurer, public health authority or funding body relevant to your home country before making treatment decisions.",
-    copy: "© 2026 Doctor's Credit. All rights reserved.",
+    copy: "© 2026 CareJourney India. All rights reserved.",
   },
   home: {
     costGap: {
@@ -183,7 +183,7 @@ const en: PagesMessages = {
       same: "About the same",
       split: "Treatment is {pct}% of the India total. The rest is travel, stay, visa and follow-up.",
     },
-    heroAria: "Doctor's Credit homepage",
+    heroAria: "CareJourney India homepage",
     heroLabel: "World-class care. A brighter tomorrow.",
     heroBefore: "India is a global destination for ",
     heroEm: "life-changing care.",
@@ -192,10 +192,10 @@ const en: PagesMessages = {
       "Patients anywhere in the world explore India for advanced medical expertise, modern hospitals, compassionate care and outstanding value. We help you decide whether that journey is the right choice for the care you are considering.",
     talk: "Talk to a care coordinator",
     compare: "Compare costs: home vs India",
-    watchTitle: "Watch our story",
-    watchSub: "2 minutes",
+    watchTitle: "See how it works",
+    watchSub: "A quick walkthrough",
     heroAlt:
-      "Editorial photograph of a relaxed international couple at a historic waterfront in India. Generated imagery, not a photograph of DCredit patients.",
+      "Editorial photograph of a relaxed international couple at a historic waterfront in India. Generated imagery, not a photograph of CareJourney India patients.",
     handwrite: ["“New Treatment", "New Hope", "A Brighter Tomorrow”"],
     capabilitiesAria: "Capabilities found across India healthcare",
     capabilities: [
@@ -248,7 +248,7 @@ const en: PagesMessages = {
         "Patient safety",
         "Continuity",
       ],
-      note: "DCredit does not assume that every hospital or physician offers the same level of care. Accreditation is useful information, but it is not a guarantee of outcome.",
+      note: "CareJourney India does not assume that every hospital or physician offers the same level of care. Accreditation is useful information, but it is not a guarantee of outcome.",
       link: "How we evaluate providers →",
     },
     achievements: {
@@ -271,7 +271,7 @@ const en: PagesMessages = {
     regions: {
       label: "International patients",
       title: "Care knows no single border.",
-      lede: "People considering treatment in India come from many healthcare systems and many parts of the world. These regions describe who DCredit is written for. They are not patient counts.",
+      lede: "People considering treatment in India come from many healthcare systems and many parts of the world. These regions describe who CareJourney India is written for. They are not patient counts.",
       items: [
         "North America",
         "Europe",
@@ -284,11 +284,11 @@ const en: PagesMessages = {
     journey: {
       label: "The journey",
       title: "A structured decision. Not a sales pitch.",
-      lede: "You have not already chosen India by starting this conversation. Your first step is a conversation with a DCredit care coordinator.",
+      lede: "You have not already chosen India by starting this conversation. Your first step is a conversation with a CareJourney India care coordinator.",
       rail: [
         {
           rail: "Understand",
-          body: "Share the care you are considering, your general situation, healthcare coverage or funding, timeline and goals. This is a conversation with DCredit, not a diagnosis or medical evaluation.",
+          body: "Share the care you are considering, your general situation, healthcare coverage or funding, timeline and goals. This is a conversation with CareJourney India, not a diagnosis or medical evaluation.",
         },
         {
           rail: "Explore",
@@ -308,7 +308,7 @@ const en: PagesMessages = {
         },
         {
           rail: "Plan",
-          body: "We are building DCredit in stages, starting with the decision itself. Future services may include deeper provider coordination and travel or care support when those offerings become available.",
+          body: "We are building CareJourney India in stages, starting with the decision itself. Future services may include deeper provider coordination and travel or care support when those offerings become available.",
         },
         {
           rail: "Return home",
@@ -338,7 +338,7 @@ const en: PagesMessages = {
         "Treatment may happen in India.",
         "Your life continues at home.",
       ],
-      body: "Planning does not end when treatment ends. Travel, recovery, follow-up and communication with healthcare professionals at home all matter. DCredit does not itself provide clinical follow-up.",
+      body: "Planning does not end when treatment ends. Travel, recovery, follow-up and communication with healthcare professionals at home all matter. CareJourney India does not itself provide clinical follow-up.",
     },
     faq: { label: "Questions", title: "Asked plainly.", all: "All questions →" },
     finalCta: {
@@ -393,20 +393,20 @@ const es: PagesMessages = {
       "A veces puede que no.",
       "En cualquier caso, usted merece saberlo.",
     ],
-    aboutLabel: "Acerca de DCredit",
+    aboutLabel: "Acerca de CareJourney India",
     about:
-      "DCredit es una plataforma internacional de decisión y coordinación de atención planificada. No somos un hospital, un médico, una aseguradora, un servicio médico de emergencia ni un servicio de diagnóstico.",
+      "CareJourney India es una plataforma internacional de decisión y coordinación de atención planificada. No somos un hospital, un médico, una aseguradora, un servicio médico de emergencia ni un servicio de diagnóstico.",
     importantLabel: "Importante",
     important1:
-      "La información de este sitio web es educativa y tiene fines de coordinación. La conversación inicial de atención de $5 es con un coordinador de atención de DCredit; no es una evaluación clínica, una opinión de especialista, un diagnóstico ni una revisión de historiales médicos.",
+      "La información de este sitio web es educativa y tiene fines de coordinación. La conversación inicial de atención de $5 es con un coordinador de atención de CareJourney India; no es una evaluación clínica, una opinión de especialista, un diagnóstico ni una revisión de historiales médicos.",
     important2:
       "Las decisiones sobre el tratamiento deben tomarse con profesionales de la salud calificados. Los costos, la disponibilidad, los planes de tratamiento, los resultados y los requisitos de viaje varían.",
     medicalLabel: "Información médica",
     medical:
-      "DCredit no presta atención médica de emergencia. Si tiene una emergencia, comuníquese con los servicios de emergencia de su localidad.",
+      "CareJourney India no presta atención médica de emergencia. Si tiene una emergencia, comuníquese con los servicios de emergencia de su localidad.",
     cross:
       "Para la atención transfronteriza, consulte a los profesionales de la salud, la aseguradora, la autoridad de salud pública o la entidad de financiamiento correspondiente a su país de origen antes de tomar decisiones sobre el tratamiento.",
-    copy: "© 2026 Doctor's Credit. Todos los derechos reservados.",
+    copy: "© 2026 CareJourney India. Todos los derechos reservados.",
   },
   home: {
     costGap: {
@@ -420,7 +420,7 @@ const es: PagesMessages = {
       same: "Aproximadamente igual",
       split: "El tratamiento es el {pct}% del total en la India. El resto es viaje, estancia, visa y seguimiento.",
     },
-    heroAria: "Página de inicio de Doctor's Credit",
+    heroAria: "Página de inicio de CareJourney India",
     heroLabel: "Atención de clase mundial. Un mañana más luminoso.",
     heroBefore: "La India es un destino global para ",
     heroEm: "una atención que cambia vidas.",
@@ -429,10 +429,10 @@ const es: PagesMessages = {
       "Pacientes de todo el mundo exploran la India en busca de experiencia médica avanzada, hospitales modernos, atención compasiva y un valor sobresaliente. Le ayudamos a decidir si ese viaje es la opción adecuada para la atención que está considerando.",
     talk: "Hablar con un coordinador de atención",
     compare: "Comparar costos: en casa o en la India",
-    watchTitle: "Ver nuestra historia",
-    watchSub: "2 minutos",
+    watchTitle: "Vea cómo funciona",
+    watchSub: "Un recorrido breve",
     heroAlt:
-      "Fotografía editorial de una pareja internacional relajada en un malecón histórico de la India. Imagen generada, no una fotografía de pacientes de DCredit.",
+      "Fotografía editorial de una pareja internacional relajada en un malecón histórico de la India. Imagen generada, no una fotografía de pacientes de CareJourney India.",
     handwrite: ["“Nuevo tratamiento", "Nueva esperanza", "Un mañana más luminoso”"],
     capabilitiesAria: "Capacidades presentes en la atención médica de la India",
     capabilities: [
@@ -485,7 +485,7 @@ const es: PagesMessages = {
         "Seguridad del paciente",
         "Continuidad",
       ],
-      note: "DCredit no asume que todos los hospitales o médicos ofrezcan el mismo nivel de atención. La acreditación es información útil, pero no garantiza un resultado.",
+      note: "CareJourney India no asume que todos los hospitales o médicos ofrezcan el mismo nivel de atención. La acreditación es información útil, pero no garantiza un resultado.",
       link: "Cómo evaluamos a los proveedores →",
     },
     achievements: {
@@ -508,7 +508,7 @@ const es: PagesMessages = {
     regions: {
       label: "Pacientes internacionales",
       title: "La atención no conoce una sola frontera.",
-      lede: "Las personas que consideran un tratamiento en la India provienen de muchos sistemas de salud y de muchas partes del mundo. Estas regiones describen para quién está escrito DCredit. No son cifras de pacientes.",
+      lede: "Las personas que consideran un tratamiento en la India provienen de muchos sistemas de salud y de muchas partes del mundo. Estas regiones describen para quién está escrito CareJourney India. No son cifras de pacientes.",
       items: [
         "Norteamérica",
         "Europa",
@@ -521,11 +521,11 @@ const es: PagesMessages = {
     journey: {
       label: "El recorrido",
       title: "Una decisión estructurada. No un discurso de ventas.",
-      lede: "Al iniciar esta conversación no ha elegido ya la India. Su primer paso es una conversación con un coordinador de atención de DCredit.",
+      lede: "Al iniciar esta conversación no ha elegido ya la India. Su primer paso es una conversación con un coordinador de atención de CareJourney India.",
       rail: [
         {
           rail: "Comprender",
-          body: "Cuéntenos qué atención está considerando, su situación general, su cobertura o financiamiento de salud, sus plazos y sus objetivos. Es una conversación con DCredit, no un diagnóstico ni una evaluación médica.",
+          body: "Cuéntenos qué atención está considerando, su situación general, su cobertura o financiamiento de salud, sus plazos y sus objetivos. Es una conversación con CareJourney India, no un diagnóstico ni una evaluación médica.",
         },
         {
           rail: "Explorar",
@@ -545,7 +545,7 @@ const es: PagesMessages = {
         },
         {
           rail: "Planificar",
-          body: "Estamos construyendo DCredit por etapas, empezando por la decisión en sí. Los servicios futuros podrían incluir una coordinación más profunda con proveedores y apoyo de viaje o atención cuando esas ofertas estén disponibles.",
+          body: "Estamos construyendo CareJourney India por etapas, empezando por la decisión en sí. Los servicios futuros podrían incluir una coordinación más profunda con proveedores y apoyo de viaje o atención cuando esas ofertas estén disponibles.",
         },
         {
           rail: "Regreso a casa",
@@ -575,7 +575,7 @@ const es: PagesMessages = {
         "El tratamiento puede realizarse en la India.",
         "Su vida continúa en casa.",
       ],
-      body: "La planificación no termina cuando termina el tratamiento. El viaje, la recuperación, el seguimiento y la comunicación con los profesionales de salud en su país son importantes. DCredit no presta por sí mismo seguimiento clínico.",
+      body: "La planificación no termina cuando termina el tratamiento. El viaje, la recuperación, el seguimiento y la comunicación con los profesionales de salud en su país son importantes. CareJourney India no presta por sí mismo seguimiento clínico.",
     },
     faq: {
       label: "Preguntas",
@@ -634,20 +634,20 @@ const hi: PagesMessages = {
       "कभी नहीं भी हो सकता।",
       "दोनों ही स्थितियों में, सही जानकारी पाना आपका अधिकार है।",
     ],
-    aboutLabel: "DCredit के बारे में",
+    aboutLabel: "CareJourney India के बारे में",
     about:
-      "DCredit एक अंतरराष्ट्रीय नियोजित-देखभाल निर्णय और समन्वय मंच है। हम कोई अस्पताल, चिकित्सक, बीमाकर्ता, आपातकालीन चिकित्सा सेवा या निदान सेवा नहीं हैं।",
+      "CareJourney India एक अंतरराष्ट्रीय नियोजित-देखभाल निर्णय और समन्वय मंच है। हम कोई अस्पताल, चिकित्सक, बीमाकर्ता, आपातकालीन चिकित्सा सेवा या निदान सेवा नहीं हैं।",
     importantLabel: "महत्वपूर्ण",
     important1:
-      "इस वेबसाइट की जानकारी शैक्षिक है और समन्वय के उद्देश्य से दी गई है। $5 की प्रारंभिक देखभाल बातचीत DCredit के केयर कोऑर्डिनेटर के साथ होती है; यह कोई क्लिनिकल आकलन, विशेषज्ञ की राय, निदान या मेडिकल रिकॉर्ड की समीक्षा नहीं है।",
+      "इस वेबसाइट की जानकारी शैक्षिक है और समन्वय के उद्देश्य से दी गई है। $5 की प्रारंभिक देखभाल बातचीत CareJourney India के केयर कोऑर्डिनेटर के साथ होती है; यह कोई क्लिनिकल आकलन, विशेषज्ञ की राय, निदान या मेडिकल रिकॉर्ड की समीक्षा नहीं है।",
     important2:
       "उपचार संबंधी निर्णय योग्य स्वास्थ्य पेशेवरों के साथ मिलकर लिए जाने चाहिए। लागत, उपलब्धता, उपचार योजनाएँ, परिणाम और यात्रा संबंधी आवश्यकताएँ अलग-अलग होती हैं।",
     medicalLabel: "चिकित्सा जानकारी",
     medical:
-      "DCredit आपातकालीन चिकित्सा देखभाल प्रदान नहीं करता। यदि आप किसी आपात स्थिति में हैं, तो अपनी स्थानीय आपातकालीन सेवाओं से संपर्क करें।",
+      "CareJourney India आपातकालीन चिकित्सा देखभाल प्रदान नहीं करता। यदि आप किसी आपात स्थिति में हैं, तो अपनी स्थानीय आपातकालीन सेवाओं से संपर्क करें।",
     cross:
       "सीमा-पार देखभाल के लिए, उपचार संबंधी निर्णय लेने से पहले अपने देश के संबंधित स्वास्थ्य पेशेवरों, बीमाकर्ता, सार्वजनिक स्वास्थ्य प्राधिकरण या वित्तपोषण संस्था से परामर्श करें।",
-    copy: "© 2026 Doctor's Credit. सर्वाधिकार सुरक्षित।",
+    copy: "© 2026 CareJourney India. सर्वाधिकार सुरक्षित।",
   },
   home: {
     costGap: {
@@ -661,7 +661,7 @@ const hi: PagesMessages = {
       same: "लगभग बराबर",
       split: "भारत के कुल खर्च में इलाज का हिस्सा {pct}% है। बाकी यात्रा, ठहरना, वीज़ा और फ़ॉलो-अप है।",
     },
-    heroAria: "Doctor's Credit का होमपेज",
+    heroAria: "CareJourney India का होमपेज",
     heroLabel: "विश्व-स्तरीय देखभाल। एक बेहतर कल।",
     heroBefore: "भारत ",
     heroEm: "जीवन बदल देने वाली देखभाल",
@@ -670,10 +670,10 @@ const hi: PagesMessages = {
       "दुनिया भर के मरीज़ उन्नत चिकित्सा विशेषज्ञता, आधुनिक अस्पतालों, संवेदनशील देखभाल और उत्कृष्ट मूल्य के लिए भारत को देखते हैं। जिस देखभाल पर आप विचार कर रहे हैं, उसके लिए वह यात्रा सही विकल्प है या नहीं, यह तय करने में हम आपकी मदद करते हैं।",
     talk: "केयर कोऑर्डिनेटर से बात करें",
     compare: "लागत की तुलना करें: घर बनाम भारत",
-    watchTitle: "हमारी कहानी देखें",
-    watchSub: "2 मिनट",
+    watchTitle: "देखें यह कैसे काम करता है",
+    watchSub: "एक छोटा परिचय",
     heroAlt:
-      "भारत में एक ऐतिहासिक जलतट पर निश्चिंत अंतरराष्ट्रीय दंपती की संपादकीय तस्वीर। यह जनरेट की गई छवि है, DCredit के मरीज़ों की तस्वीर नहीं।",
+      "भारत में एक ऐतिहासिक जलतट पर निश्चिंत अंतरराष्ट्रीय दंपती की संपादकीय तस्वीर। यह जनरेट की गई छवि है, CareJourney India के मरीज़ों की तस्वीर नहीं।",
     handwrite: ["“नया उपचार", "नई आशा", "एक बेहतर कल”"],
     capabilitiesAria: "भारत की स्वास्थ्य सेवा में मिलने वाली क्षमताएँ",
     capabilities: [
@@ -726,7 +726,7 @@ const hi: PagesMessages = {
         "मरीज़ की सुरक्षा",
         "निरंतरता",
       ],
-      note: "DCredit यह नहीं मानता कि हर अस्पताल या चिकित्सक एक ही स्तर की देखभाल देता है। मान्यता उपयोगी जानकारी है, लेकिन परिणाम की गारंटी नहीं।",
+      note: "CareJourney India यह नहीं मानता कि हर अस्पताल या चिकित्सक एक ही स्तर की देखभाल देता है। मान्यता उपयोगी जानकारी है, लेकिन परिणाम की गारंटी नहीं।",
       link: "हम प्रदाताओं का मूल्यांकन कैसे करते हैं →",
     },
     achievements: {
@@ -749,7 +749,7 @@ const hi: PagesMessages = {
     regions: {
       label: "अंतरराष्ट्रीय मरीज़",
       title: "देखभाल किसी एक सीमा को नहीं मानती।",
-      lede: "भारत में उपचार पर विचार करने वाले लोग कई स्वास्थ्य प्रणालियों और दुनिया के कई हिस्सों से आते हैं। ये क्षेत्र बताते हैं कि DCredit किनके लिए लिखा गया है। ये मरीज़ों की संख्या नहीं हैं।",
+      lede: "भारत में उपचार पर विचार करने वाले लोग कई स्वास्थ्य प्रणालियों और दुनिया के कई हिस्सों से आते हैं। ये क्षेत्र बताते हैं कि CareJourney India किनके लिए लिखा गया है। ये मरीज़ों की संख्या नहीं हैं।",
       items: [
         "उत्तरी अमेरिका",
         "यूरोप",
@@ -762,11 +762,11 @@ const hi: PagesMessages = {
     journey: {
       label: "यात्रा",
       title: "एक सुविचारित निर्णय। बिक्री का दबाव नहीं।",
-      lede: "इस बातचीत को शुरू करने का मतलब यह नहीं कि आपने भारत को चुन लिया है। आपका पहला कदम DCredit के केयर कोऑर्डिनेटर से बातचीत है।",
+      lede: "इस बातचीत को शुरू करने का मतलब यह नहीं कि आपने भारत को चुन लिया है। आपका पहला कदम CareJourney India के केयर कोऑर्डिनेटर से बातचीत है।",
       rail: [
         {
           rail: "समझें",
-          body: "आप किस देखभाल पर विचार कर रहे हैं, आपकी सामान्य स्थिति, स्वास्थ्य कवरेज या वित्तपोषण, समय-सीमा और लक्ष्य साझा करें। यह DCredit के साथ बातचीत है, कोई निदान या चिकित्सा मूल्यांकन नहीं।",
+          body: "आप किस देखभाल पर विचार कर रहे हैं, आपकी सामान्य स्थिति, स्वास्थ्य कवरेज या वित्तपोषण, समय-सीमा और लक्ष्य साझा करें। यह CareJourney India के साथ बातचीत है, कोई निदान या चिकित्सा मूल्यांकन नहीं।",
         },
         {
           rail: "तलाशें",
@@ -786,7 +786,7 @@ const hi: PagesMessages = {
         },
         {
           rail: "योजना बनाएँ",
-          body: "हम DCredit को चरणों में बना रहे हैं, शुरुआत निर्णय से। भविष्य की सेवाओं में प्रदाताओं के साथ गहरा समन्वय और यात्रा या देखभाल सहायता शामिल हो सकती है, जब ये सुविधाएँ उपलब्ध होंगी।",
+          body: "हम CareJourney India को चरणों में बना रहे हैं, शुरुआत निर्णय से। भविष्य की सेवाओं में प्रदाताओं के साथ गहरा समन्वय और यात्रा या देखभाल सहायता शामिल हो सकती है, जब ये सुविधाएँ उपलब्ध होंगी।",
         },
         {
           rail: "घर वापसी",
@@ -806,7 +806,7 @@ const hi: PagesMessages = {
     returnBand: {
       label: "घर वापसी की योजना",
       lines: ["उपचार भारत में हो सकता है।", "आपकी ज़िंदगी घर पर जारी रहती है।"],
-      body: "उपचार खत्म होने के साथ योजना खत्म नहीं होती। यात्रा, स्वास्थ्य-लाभ, फ़ॉलो-अप और अपने देश के स्वास्थ्य पेशेवरों से संवाद, सब मायने रखते हैं। DCredit स्वयं क्लिनिकल फ़ॉलो-अप प्रदान नहीं करता।",
+      body: "उपचार खत्म होने के साथ योजना खत्म नहीं होती। यात्रा, स्वास्थ्य-लाभ, फ़ॉलो-अप और अपने देश के स्वास्थ्य पेशेवरों से संवाद, सब मायने रखते हैं। CareJourney India स्वयं क्लिनिकल फ़ॉलो-अप प्रदान नहीं करता।",
     },
     faq: { label: "सवाल", title: "सीधे शब्दों में पूछे गए।", all: "सभी सवाल →" },
     finalCta: {

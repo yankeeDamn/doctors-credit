@@ -5,7 +5,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .ed-hero,
@@ -55,6 +55,32 @@
 .ed-hero h1 em {
   color: var(--teal);
   font-style: normal;
+}
+
+/* The one hero flourish: a route line draws under the key phrase once the headline has landed,
+   the same gesture as the logo mark. box-decoration-break keeps it tidy when the phrase wraps. */
+.ed-home-hero h1 em {
+  background-image: linear-gradient(var(--teal-bright), var(--teal-bright));
+  background-repeat: no-repeat;
+  background-position: 0 94%;
+  background-size: 100% 0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ed-home-hero h1 em {
+    animation: hero-underline 1s 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes hero-underline {
+  from {
+    background-size: 0 0.06em;
+  }
+  to {
+    background-size: 100% 0.06em;
+  }
 }
 
 .ed-lede {
@@ -733,7 +759,7 @@
 
 .faq-editorial summary::after {
   content: "+";
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .faq-editorial details[open] summary::after {

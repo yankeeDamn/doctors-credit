@@ -89,7 +89,7 @@ export default function WhyDoctorsCredit() {
           <h2 id="why-dc-title">
             Why opt for
             <br />
-            Doctor’s Credit?
+            CareJourney India?
           </h2>
           <p className="why-dc-lede">
             Choosing a financial partner is an important decision.

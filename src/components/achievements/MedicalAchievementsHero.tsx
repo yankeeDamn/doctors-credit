@@ -28,7 +28,7 @@ export function MedicalAchievementsHero() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/editorial/hero-india-care.jpg"
-            alt="Editorial reconstruction of people in an Indian urban setting, used as the research-note hero. Generated imagery, not a photograph of DCredit patients."
+            alt="Editorial reconstruction of people in an Indian urban setting, used as the research-note hero. Generated imagery, not a photograph of CareJourney India patients."
           />
         </figure>
       </div>

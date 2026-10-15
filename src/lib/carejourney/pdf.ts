@@ -182,7 +182,7 @@ export async function downloadComparisonPdf(input: PdfInput) {
     doc.setPage(i);
     doc.setFontSize(8.5);
     doc.setTextColor(100, 116, 139);
-    doc.text("Doctor's Credit | dcredit.in | care@dcredit.in | +91 99864 18638", M, H - 28);
+    doc.text("CareJourney India | dcredit.in | care@dcredit.in | +91 99864 18638", M, H - 28);
     doc.text(`Page ${i} of ${pages}`, W - M, H - 28, { align: "right" });
   }
 

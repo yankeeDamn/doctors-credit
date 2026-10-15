@@ -223,7 +223,7 @@ export default function LeadForm({
         <p id={`${ids}-privacy`} className="mt-2 flex items-start gap-2 text-xs leading-relaxed text-slate-700">
           <ShieldAlert aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" />
           <span>
-            Your files stay on your device. {SITE.short} does not collect medical records through this form. After we speak, your coordinator
+            Your files stay on your device. {SITE.name} does not collect medical records through this form. After we speak, your coordinator
             shares a secure way to send them. Only the file names are noted.
           </span>
         </p>

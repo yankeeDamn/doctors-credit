@@ -53,7 +53,7 @@ async function provisionMeeting(
         ? `${app.preferredConsultationDate}T${app.appointmentTime}:00`
         : new Date().toISOString();
     const meeting = await zoom.createMeeting({
-      topic: "DCredit Initial Assessment",
+      topic: "CareJourney India Initial Assessment",
       startTime,
       durationMinutes: 30,
       timezone,
