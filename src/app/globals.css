@@ -350,7 +350,7 @@ section {
   }
 }
 
-/* Eight links plus the call to action need about 1490px at full spacing. Tighten them on laptops
+/* Nine links plus the call to action need about 1490px at full spacing. Tighten them on laptops
    rather than letting the row run underneath the logo. */
 @media (max-width: 1499px) {
   .nav {
@@ -524,7 +524,7 @@ section {
 
 /* Below this width the full link row no longer fits, so use the menu button. The site's other
    layout changes stay at 980px. */
-@media (max-width: 1230px) {
+@media (max-width: 1350px) {
   .nav-desktop {
     display: none;
   }

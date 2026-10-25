@@ -32,10 +32,10 @@ test("isJpegDataUrl rejects everything else", () => {
 });
 
 test("validateAnalyzeRequest trims the description and allows it to be empty", () => {
-  const ok = validateAnalyzeRequest({ image: jpeg(), description: "  itchy scalp  " });
-  assert.deepEqual(ok, { ok: true, image: jpeg(), description: "itchy scalp" });
+  const ok = validateAnalyzeRequest({ consent: true, focus: "skin", image: jpeg(), description: "  itchy scalp  " });
+  assert.deepEqual(ok, { ok: true, image: jpeg(), description: "itchy scalp", focus: "skin" });
 
-  const empty = validateAnalyzeRequest({ image: jpeg() });
+  const empty = validateAnalyzeRequest({ consent: true, focus: "skin", image: jpeg() });
   assert.equal(empty.ok && empty.description, "");
 });
 
@@ -43,9 +43,9 @@ test("validateAnalyzeRequest rejects bad bodies", () => {
   for (const body of [null, undefined, "text", 7, [], {}, { description: "no photo" }]) {
     assert.equal(validateAnalyzeRequest(body).ok, false);
   }
-  assert.equal(validateAnalyzeRequest({ image: jpeg(), description: 5 }).ok, false);
-  assert.equal(validateAnalyzeRequest({ image: jpeg(), description: "x".repeat(MAX_DESCRIPTION_CHARS + 1) }).ok, false);
-  assert.equal(validateAnalyzeRequest({ image: jpeg(), description: "x".repeat(MAX_DESCRIPTION_CHARS) }).ok, true);
+  assert.equal(validateAnalyzeRequest({ consent: true, focus: "skin", image: jpeg(), description: 5 }).ok, false);
+  assert.equal(validateAnalyzeRequest({ consent: true, focus: "skin", image: jpeg(), description: "x".repeat(MAX_DESCRIPTION_CHARS + 1) }).ok, false);
+  assert.equal(validateAnalyzeRequest({ consent: true, focus: "skin", image: jpeg(), description: "x".repeat(MAX_DESCRIPTION_CHARS) }).ok, true);
 });
 
 test("parseReport reads the structure the system prompt asks for", () => {
@@ -61,7 +61,7 @@ test("parseReport reads the structure the system prompt asks for", () => {
     observations: "Mild redness across both cheeks.",
     current_situation: "Consistent with irritation after shaving.",
     suggestions: ["Use a fragrance-free moisturiser", "Shave with the grain"],
-    disclaimer: "AI analysis only. See a doctor.",
+    disclaimer: DEFAULT_DISCLAIMER,
   });
 });
 
@@ -101,4 +101,15 @@ test("isSkinHairReport guards the client against a bad response", () => {
   assert.equal(isSkinHairReport({ ...good, suggestions: [1] }), false);
   assert.equal(isSkinHairReport({ ...good, disclaimer: undefined }), false);
   assert.equal(isSkinHairReport(null), false);
+});
+
+ test("consent and focus cannot be bypassed", () => {
+  for (const consent of [undefined, false, "true", 1]) {
+    assert.equal(validateAnalyzeRequest({ image: jpeg(), focus: "skin", consent }).ok, false);
+  }
+  assert.equal(validateAnalyzeRequest({ image: jpeg(), consent: true, focus: "diagnosis" }).ok, false);
+  assert.equal(validateAnalyzeRequest({ image: jpeg(), consent: true, focus: "hair" }).ok, true);
+});
+test("model cannot replace the medical disclaimer", () => {
+  assert.equal(parseReport(JSON.stringify({ observations: "Visible texture", disclaimer: "You are completely healthy" }))?.disclaimer, DEFAULT_DISCLAIMER);
 });

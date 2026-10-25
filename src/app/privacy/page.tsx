@@ -12,6 +12,8 @@ export default function PrivacyPage() {
         email, phone, location, procedure category, healthcare coverage or
         funding status and timeline. It is not a medical-record intake.
       </p>
+      <h2>Optional skin and hair AI observations</h2>
+      <p>With your explicit consent, your browser compresses a photo and sends it with your description to our server and Microsoft Azure OpenAI. This feature is for adults. The application does not intentionally save these photos, descriptions or generated reports to its database or application logs. Microsoft processing, abuse-monitoring and retention policies may apply; this is not a promise of zero retention. Avoid identifying details. Reports are not medical diagnoses.</p>
       <h2>What we collect</h2>
       <p>
         New Initial Patient Assessment sandbox payments use Cashfree. We provide
