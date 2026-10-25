@@ -117,3 +117,7 @@ The Conversation Verification ID is not a password, OTP, PIN or CVV. Coordinator
 Demo payments and demo Google sign-in are development-only. They cannot be enabled in staging or production, including via `ALLOW_DEMO_PAYMENTS`.
 
 Replace the placeholder D1 `database_id` values in `wrangler.jsonc` before any live deploy. The all-zero IDs are not production databases.
+
+## AI health and India medical travel
+
+Start at `/health-check` for non-diagnostic skin/hair observations, `/hospitals` for hospital verification and `/medical-tourism` for a treatment-travel checklist. See [Azure setup and launch verification](docs/AZURE-HEALTH-SETUP.md) for server secrets, Windows PowerShell instructions, known hosting/database constraints and smoke tests.

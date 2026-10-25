@@ -13,6 +13,8 @@ export interface SkinHairReport {
 export interface AnalyzeRequestBody {
   /** A data:image/jpeg;base64,... URL produced by the in-browser canvas compressor. */
   image: string;
+  consent: true;
+  focus: "skin" | "hair";
   /** What the person is noticing, in their own words. May be empty. */
   description: string;
 }
@@ -43,14 +45,16 @@ export function isJpegDataUrl(value: unknown): value is string {
 }
 
 export type ValidatedAnalyzeRequest =
-  | { ok: true; image: string; description: string }
+  | { ok: true; image: string; description: string; focus: "skin" | "hair" }
   | { ok: false; error: string };
 
 export function validateAnalyzeRequest(body: unknown): ValidatedAnalyzeRequest {
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return { ok: false, error: "Invalid request." };
   }
-  const { image, description } = body as Record<string, unknown>;
+  const { image, description, consent, focus } = body as Record<string, unknown>;
+  if (consent !== true) return { ok: false, error: "Please consent to AI processing before continuing." };
+  if (focus !== "skin" && focus !== "hair") return { ok: false, error: "Choose skin or hair analysis." };
   if (!isJpegDataUrl(image)) {
     return { ok: false, error: "Please add a photo and try again." };
   }
@@ -61,7 +65,7 @@ export function validateAnalyzeRequest(body: unknown): ValidatedAnalyzeRequest {
   if (text.length > MAX_DESCRIPTION_CHARS) {
     return { ok: false, error: `Please keep the description under ${MAX_DESCRIPTION_CHARS} characters.` };
   }
-  return { ok: true, image, description: text };
+  return { ok: true, image, description: text, focus };
 }
 
 function clean(value: unknown, max: number): string {
@@ -79,7 +83,7 @@ function clean(value: unknown, max: number): string {
 
 /**
  * Turns the model's JSON text into a report we can safely render, or null if it is unusable.
- * The disclaimer never depends on the model: if it is missing, a standard one is filled in.
+ * The disclaimer never depends on the model: always use the application-owned warning.
  */
 export function parseReport(raw: string | null | undefined): SkinHairReport | null {
   if (!raw) return null;
@@ -105,7 +109,7 @@ export function parseReport(raw: string | null | undefined): SkinHairReport | nu
     observations,
     current_situation: clean(o.current_situation, 2000),
     suggestions,
-    disclaimer: clean(o.disclaimer, 600) || DEFAULT_DISCLAIMER,
+    disclaimer: DEFAULT_DISCLAIMER,
   };
 }
 

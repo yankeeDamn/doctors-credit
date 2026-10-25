@@ -15,6 +15,7 @@ export default function Nav({ signedIn }: { signedIn: boolean }) {
     ["/hospitals", t.nav.hospitals],
     ["/carejourney", t.nav.compareCosts],
     ["/cost-calculator", t.nav.costCalculator],
+    ["/health-check", "AI health"],
     ["/research", t.nav.research],
     ["/stories", t.nav.stories],
     ["/about", t.nav.about],

@@ -116,6 +116,8 @@ export default function SkinHairAnalyzer() {
   const abortRef = useRef<AbortController | null>(null);
   const photoJob = useRef(0);
 
+  const [consent, setConsent] = useState(false);
+  const [focus, setFocus] = useState<"skin" | "hair">("skin");
   const [stage, setStage] = useState<Stage>("idle");
   const [photo, setPhoto] = useState<Photo | null>(null);
   const [description, setDescription] = useState("");
@@ -142,6 +144,7 @@ export default function SkinHairAnalyzer() {
     const job = ++photoJob.current;
     setError(null);
     setAnalysis(null);
+    setPhoto(null);
 
     if (file.size > MAX_SOURCE_BYTES) {
       setError("That file is too large. Please choose a regular photo.");
@@ -167,7 +170,7 @@ export default function SkinHairAnalyzer() {
 
   async function analyze(event: FormEvent) {
     event.preventDefault();
-    if (!photo || busy) return;
+    if (!photo || busy || !consent) return;
 
     setError(null);
     setAnalysis(null);
@@ -181,7 +184,7 @@ export default function SkinHairAnalyzer() {
       const res = await fetch("/api/analyze-patient", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: photo.dataUrl, description: description.trim() }),
+        body: JSON.stringify({ image: photo.dataUrl, description: description.trim(), consent, focus }),
         signal: controller.signal,
       });
       const data: unknown = await res.json().catch(() => null);
@@ -212,6 +215,7 @@ export default function SkinHairAnalyzer() {
     abortRef.current?.abort();
     setPhoto(null);
     setDescription("");
+    setConsent(false);
     setAnalysis(null);
     setError(null);
     setStage("idle");
@@ -225,7 +229,7 @@ export default function SkinHairAnalyzer() {
   const small = `${button} px-3 py-1.5 text-xs border border-slate-300 bg-white text-slate-800 hover:border-slate-400 hover:bg-slate-50`;
 
   return (
-    <div ref={rootRef} className="mx-auto w-full max-w-4xl scroll-mt-24 text-slate-900">
+    <div id="skin-hair-analyzer" ref={rootRef} className="mx-auto w-full max-w-4xl scroll-mt-24 text-slate-900">
       <div className="overflow-hidden rounded-3xl border border-(--line) bg-white shadow-sm">
         <div className="border-b border-(--line) bg-(--paper-2)/60 px-5 py-6 sm:px-8">
           <h2 className="m-0! max-w-none! text-2xl! sm:text-3xl!">Skin and hair analyzer</h2>
@@ -235,6 +239,9 @@ export default function SkinHairAnalyzer() {
           </p>
         </div>
 
+        <div className="px-5 pt-5 sm:px-8">
+          <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-950">For adults, for non-emergency concerns only. A photo cannot check your overall health. If you feel seriously unwell, seek urgent medical care instead of waiting for AI.</p>
+        </div>
         <form onSubmit={analyze} className="grid gap-6 p-5 sm:p-8 md:grid-cols-2 md:gap-8">
           {/* Photo */}
           <div>
@@ -348,7 +355,16 @@ export default function SkinHairAnalyzer() {
               </span>
             </p>
 
-            <button type="submit" disabled={!photo || busy} className={`${button} mt-4 px-4 py-3 text-base bg-(--navy) text-white hover:bg-(--navy-mid)`}>
+            <label className="mt-4 block text-sm font-medium">Analysis focus
+              <select value={focus} disabled={busy} onChange={(e) => { setFocus(e.target.value as "skin" | "hair"); setAnalysis(null); }} className="mt-2 block w-full rounded-xl border border-slate-300 p-3">
+                <option value="skin">Skin</option><option value="hair">Hair and scalp</option>
+              </select>
+            </label>
+            <label className="mt-4 flex items-start gap-3 text-sm">
+              <input type="checkbox" required checked={consent} disabled={busy} onChange={(e) => setConsent(e.target.checked)} className="mt-1" />
+              <span>I am 18 or older and agree to send this photo and description to Microsoft Azure AI for non-diagnostic observations. I have permission to share this photo. <a href="/privacy" className="underline">Privacy details</a></span>
+            </label>
+            <button type="submit" disabled={!photo || busy || !consent} className={`${button} mt-4 px-4 py-3 text-base bg-(--navy) text-white hover:bg-(--navy-mid)`}>
               {stage === "analyzing" ? (
                 <>
                   <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" />
@@ -371,7 +387,7 @@ export default function SkinHairAnalyzer() {
             ) : null}
 
             <p className="mt-4 text-xs leading-relaxed text-slate-600">
-              Your photo is resized on your device, then sent to an AI service to write the report. CareJourney India does not save it.
+              Your photo is resized on your device, then sent to an AI service to write the report. This application does not intentionally store photos or reports. Provider processing and retention policies apply. Avoid faces, names and identifying details.
               Do not use this for an emergency. Call your local emergency number instead.
             </p>
           </div>
