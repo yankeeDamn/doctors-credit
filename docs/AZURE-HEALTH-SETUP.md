@@ -2,6 +2,7 @@
 
 ## What this release adds
 
+- `/`: multilingual homepage showcase (English, Spanish and Hindi) featuring AI skin/hair observations, hospital verification and medical travel. All cards navigate to existing pages; they do not collect photos on the homepage.
 - `/health-check`: entry point for non-diagnostic skin/hair observations and care planning.
 - `/hospitals`: official NABH directory link and provider verification questions; no invented hospital records, affiliation claims or bookings.
 - `/medical-tourism`: domestic/international travel preparation checklist, official visa and accreditation sources, existing cost comparison and coordination entry points.
@@ -52,9 +53,13 @@ npx next dev --hostname 127.0.0.1 --port 3100
 
 Visit http://127.0.0.1:3100/health-check. Local development uses the existing local repository configuration. Do not set APP_ENV=production without a production database binding.
 
+## Homepage showcase
+
+The homepage includes a new section immediately after the capabilities strip. The AI card goes to `/health-check`, the verification card goes to `/hospitals`, and the travel card goes to `/medical-tourism`. The content is informational and does not indicate Azure is configured or that a provider is verified. Switch the homepage language between EN, ES and HI to review translations; obtain professional review of any health-related translated copy before broad launch.
+
 ## Verify before launch
 
-1. Open `/health-check`, select Skin then Hair, upload a non-sensitive test photo, enter context, and accept consent. The analyze button must stay disabled without consent or a photo.
+1. On `/`, confirm all three showcase cards navigate correctly on desktop and mobile (including keyboard focus and EN/ES/HI switching). Then open `/health-check`, select Skin then Hair, upload a non-sensitive test photo, enter context, and accept consent. The analyze button must stay disabled without consent or a photo.
 2. Confirm the network payload contains a JPEG data URL, `focus`, and `consent: true`; never a key. Confirm compression displays dimensions no larger than 800px.
 3. With correct Azure configuration expect HTTP 200 and a fixed disclaimer. This is a live billable test: run it with your own Azure deployment. Mocked tests do not establish clinical accuracy or a working Azure account.
 4. Without secrets expect 503; without consent expect 400; with a remote image URL expect 400; oversized payloads expect 413. Truncated/refused output is rejected and malformed model JSON returns 502.

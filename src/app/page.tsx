@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import CostCalculator from "@/components/CostCalculator";
+import HomeHealthShowcase from "@/components/HomeHealthShowcase";
 import { IndiaDecisionMap } from "@/components/IndiaDecisionMap";
 import CostGapTeaser from "@/components/carejourney/CostGapTeaser";
 import { PatientStoriesGrid } from "@/components/PatientStoriesGrid";
@@ -146,7 +147,7 @@ function LineIcon({
 }
 
 export default async function Home() {
-  const { t } = await getPages();
+  const { t, lang } = await getPages();
   const h = t.home;
   const liveStories = publishedStories();
   const hasStories = liveStories.length > 0;
@@ -225,6 +226,8 @@ export default async function Home() {
           </ul>
         </div>
       </section>
+
+      <HomeHealthShowcase lang={lang} />
 
       <section className="ed-home-stories" id="stories">
         <div className="shell ed-home-split">
