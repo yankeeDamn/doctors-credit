@@ -452,7 +452,7 @@ function ReportCard({
 
           {report.current_situation ? (
             <div className="rounded-2xl bg-sky-50 px-4 py-3.5 ring-1 ring-sky-100">
-              <h4 className="text-sm font-semibold text-sky-950">What this may mean for you</h4>
+              <h4 className="text-sm font-semibold text-sky-950">Points to discuss with a clinician</h4>
               <p className="mt-1.5 text-base leading-relaxed text-slate-800">{report.current_situation}</p>
             </div>
           ) : null}
@@ -479,6 +479,9 @@ function ReportCard({
             </div>
           ) : null}
 
+          {report.limitations ? <section className="rounded-2xl bg-slate-50 p-4"><h4 className="font-semibold">What this photo cannot tell us</h4><p className="mt-2">{report.limitations}</p></section> : null}
+          {report.questions.length ? <section className="rounded-2xl bg-teal-50 p-4"><h4 className="font-semibold">Questions for your dermatologist</h4><ul className="mt-2 list-disc space-y-2 pl-5">{report.questions.map((question, index) => <li key={index}>{question}</li>)}</ul></section> : null}
+          <p className="text-sm text-slate-600">For treatment prices and payment options, request a written quote from a qualified provider. This tool does not verify prices or eligibility.</p>
           <div role="note" className="flex gap-3 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3.5 text-amber-950">
             <TriangleAlert aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
             <p className="text-sm font-medium leading-relaxed">{report.disclaimer}</p>

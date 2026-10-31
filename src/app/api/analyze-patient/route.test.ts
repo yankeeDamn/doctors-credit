@@ -23,7 +23,7 @@ test("analyzer rejects unavailable config and invalid inputs; handles Azure resp
   assert.equal((await POST(request({ ...valid, image: "x".repeat(1_020_001) }))).status, 413);
 
   let finishReason = "stop";
-  let content = JSON.stringify({ observations: "Visible flaking", suggestions: ["Discuss persistent symptoms with a clinician"], disclaimer: "No medical problem" });
+  let content = JSON.stringify({ isValidImage: true, observations: "Visible flaking", suggestions: ["Discuss persistent symptoms with a clinician"], disclaimer: "No medical problem" });
   const mocked = t.mock.method(globalThis, "fetch", async (url: RequestInfo | URL, init?: RequestInit) => {
     assert.match(String(url), /test.openai.azure.com/);
     const payload = JSON.parse(String(init?.body));
@@ -40,5 +40,11 @@ test("analyzer rejects unavailable config and invalid inputs; handles Azure resp
   finishReason = "stop";
   content = "invalid json";
   assert.equal((await POST(request(valid))).status, 502);
-  assert.equal(mocked.mock.callCount(), 3);
+  content = JSON.stringify({ isValidImage: false, observations: "Invented", suggestions: ["unwanted"] });
+  const unsuitable = await POST(request(valid));
+  assert.equal(unsuitable.status, 422);
+  assert.equal((await unsuitable.json()).report, undefined);
+  content = JSON.stringify({ observations: "Missing validity" });
+  assert.equal((await POST(request(valid))).status, 502);
+  assert.equal(mocked.mock.callCount(), 5);
 });

@@ -62,6 +62,8 @@ test("parseReport reads the structure the system prompt asks for", () => {
     current_situation: "Consistent with irritation after shaving.",
     suggestions: ["Use a fragrance-free moisturiser", "Shave with the grain"],
     disclaimer: DEFAULT_DISCLAIMER,
+    limitations: "",
+    questions: [],
   });
 });
 
@@ -95,7 +97,7 @@ test("parseReport returns null for unusable output", () => {
 });
 
 test("isSkinHairReport guards the client against a bad response", () => {
-  const good = { observations: "a", current_situation: "b", suggestions: ["c"], disclaimer: "d" };
+  const good = { observations: "a", current_situation: "b", suggestions: ["c"], disclaimer: "d", limitations: "", questions: [] };
   assert.equal(isSkinHairReport(good), true);
   assert.equal(isSkinHairReport({ ...good, suggestions: "c" }), false);
   assert.equal(isSkinHairReport({ ...good, suggestions: [1] }), false);
@@ -112,4 +114,11 @@ test("isSkinHairReport guards the client against a bad response", () => {
 });
 test("model cannot replace the medical disclaimer", () => {
   assert.equal(parseReport(JSON.stringify({ observations: "Visible texture", disclaimer: "You are completely healthy" }))?.disclaimer, DEFAULT_DISCLAIMER);
+});
+
+ test("image assessment fails closed when absent or malformed", async () => {
+  const { imageAssessment } = await import("./skin-hair");
+  assert.equal(imageAssessment('{"isValidImage":true}'), "usable");
+  assert.equal(imageAssessment('{"isValidImage":false}'), "unusable");
+  for (const raw of ["{}", "garbage", '{"isValidImage":"true"}']) assert.equal(imageAssessment(raw), "unknown");
 });

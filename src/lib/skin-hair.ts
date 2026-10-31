@@ -8,6 +8,8 @@ export interface SkinHairReport {
   current_situation: string;
   suggestions: string[];
   disclaimer: string;
+  limitations: string;
+  questions: string[];
 }
 
 export interface AnalyzeRequestBody {
@@ -110,6 +112,8 @@ export function parseReport(raw: string | null | undefined): SkinHairReport | nu
     current_situation: clean(o.current_situation, 2000),
     suggestions,
     disclaimer: DEFAULT_DISCLAIMER,
+    limitations: clean(o.limitations, 1000),
+    questions: Array.isArray(o.questions) ? o.questions.map((q) => clean(q, 250)).filter(Boolean).slice(0, 4) : [],
   };
 }
 
@@ -121,7 +125,19 @@ export function isSkinHairReport(value: unknown): value is SkinHairReport {
     typeof r.observations === "string" &&
     typeof r.current_situation === "string" &&
     typeof r.disclaimer === "string" &&
+    typeof r.limitations === "string" &&
+    Array.isArray(r.questions) && r.questions.every((q) => typeof q === "string") &&
     Array.isArray(r.suggestions) &&
     r.suggestions.every((tip) => typeof tip === "string")
   );
+}
+
+/** A model judgment only: never proof that a photo is clinically sufficient. Fail closed. */
+export function imageAssessment(raw: string | null | undefined): "usable" | "unusable" | "unknown" {
+  try {
+    const value: unknown = JSON.parse(raw || "");
+    if (!value || typeof value !== "object" || Array.isArray(value)) return "unknown";
+    const usable = (value as Record<string, unknown>).isValidImage;
+    return usable === true ? "usable" : usable === false ? "unusable" : "unknown";
+  } catch { return "unknown"; }
 }
